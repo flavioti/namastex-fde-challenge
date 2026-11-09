@@ -1,0 +1,574 @@
+==== docs/fdd/fdd-0008-carga-do-catalogo.md
+---
+tipo: fdd
+status: aprovado
+data: 2026-11-09
+---
+
+# FDD-0008 — Carga do catálogo de regras e geração de embeddings
+
+| Campo | Valor |
+| --- | --- |
+| **Autor** | Paulo (Tech Lead) |
+| **Status** | Aprovado |
+| **Data** | 2026-11-09 |
+| **Revisores** | João (Product Manager) |
+| **Origem** | [[rfc-0004-geracao-de-embeddings]] |
+| **Documentos relacionados** | [[rfc-0003-banco-postgres-pgvector]] · [[rfc-0006-servico-de-cotacao]] · [[rfc-0012-ambiente-de-execucao]] · [[adr-0003-modelo-de-embeddings]] · [[adr-0004-indice-vetorial-e-metrica]] · [[adr-0010-valores-monetarios-decimal]] · [[adr-0014-recalculo-na-troca-de-modelo]] · [[fdd-0004-banco-e-migracoes]] |
+
+> **Nível deste documento.** Este FDD é de baixo nível e serve de base para a implementação. Descreve como `plans.json` vira linhas no banco, como cada trecho é montado e embedado, como as mudanças são detectadas e como a carga é testada.
+
+## 1. Escopo
+
+A carga lê `quote-service/data/plans.json`, a fonte oficial das regras, e sincroniza o catálogo do banco com esse arquivo. Para cada regra, monta um trecho de texto, gera o vetor e grava no banco. Só o que mudou é recalculado.
+
+A carga é executada por comando explícito do avaliador. Nada é carregado automaticamente ao subir a aplicação.
+
+## 2. Stack e dependências
+
+| Item | Escolha | Referência |
+| --- | --- | --- |
+| Modelo de embeddings | `multilingual-e5-small`, 384 dimensões | [[adr-0003-modelo-de-embeddings]] |
+| Biblioteca de inferência | `sentence-transformers`, na versão do lock | [[rfc-0004-geracao-de-embeddings]] |
+| Banco | `psycopg` com o pool do FDD-0004 | [[fdd-0004-banco-e-migracoes]] |
+| Valores monetários | `Decimal` com duas casas | [[adr-0010-valores-monetarios-decimal]] |
+| Impressão digital | SHA-256 da representação canônica | Padrão da biblioteca `hashlib` |
+| Testes | pytest, com um embedder substituto | [[adr-0016-biblioteca-de-testes-pytest]] |
+
+O modelo é baixado uma vez para o diretório de modelos dentro do volume `database/`, conforme a [[rfc-0012-ambiente-de-execucao]]. O diretório é definido como constante em `config.py`.
+
+## 3. Estrutura de arquivos
+
+```
+autoseguro/
+  catalogo/
+    __init__.py
+    config.py          caminhos, nome do modelo, dimensão esperada e diretório de cache
+    fonte.py           leitura e validação de plans.json
+    regras.py          extração das regras e chaves estáveis
+    textos.py          modelos de frase por tipo de regra
+    embeddings.py      embedder do e5, com prefixo de documento
+    carga.py           sincronização: planos, regras, trechos e desativação
+    __main__.py        comando de linha de comando
+tests/
+  catalogo/
+    test_fonte.py
+    test_textos.py
+    test_carga.py
+```
+
+O comando de carga é executado com `python -m autoseguro.catalogo`.
+
+## 4. Fonte
+
+`plans.json` tem três partes, e a carga lê cada uma:
+
+| Parte | Conteúdo | Destino |
+| --- | --- | --- |
+| `planos` | Três planos, com nome, preço base, franquia e coberturas | `regras.planos` |
+| `regras.faixa_etaria` | Cinco faixas, uma delas com recusa | Uma regra por faixa, `tipo` igual a `faixa_etaria` |
+| `regras.idade_veiculo` | Quatro faixas, uma delas com recusa | Uma regra por faixa, `tipo` igual a `idade_veiculo` |
+| `regras.regiao_cep` | Prefixos de alto risco e multiplicador | Uma regra, `tipo` igual a `regiao_cep` |
+| `regras.carencia` | Coberturas com carência e dias | Uma regra, `tipo` igual a `carencia` |
+| `regras.entrada_meio_mes` | Regra de pro-rata | Uma regra, `tipo` igual a `pro_rata` |
+
+A validação de `fonte.py` confere os campos obrigatórios e os tipos antes de qualquer gravação. Um arquivo inválido interrompe a carga antes de qualquer alteração no banco. Preços são lidos como `Decimal`, conforme a [[adr-0010-valores-monetarios-decimal]].
+
+## 5. Chaves estáveis
+
+Cada regra tem um identificador UUID derivado de uma chave textual, com UUID v5 e um namespace fixo do projeto. A chave é formada pelo tipo e pelos limites da faixa, como `faixa_etaria:18-24` ou `regiao_cep`.
+
+Assim, recarregar o catálogo não cria identificadores novos para regras que continuam existindo. O histórico de cotações antigas continua apontando para a mesma regra.
+
+## 6. Textos dos trechos
+
+Cada tipo de regra tem um modelo de frase fixo em `textos.py`. O texto é preenchido com os valores da regra e nunca é escrito à mão.
+
+| Tipo | Modelo |
+| --- | --- |
+| `faixa_etaria` | Para idade de {idade_min} a {idade_max} anos, o multiplicador do prêmio é {multiplicador}. |
+| `faixa_etaria`, com recusa | Não é possível cotar para idade de {idade_min} a {idade_max} anos. {motivo} |
+| `idade_veiculo` | Para veículo com {anos_min} a {anos_max} anos, o multiplicador do prêmio é {multiplicador}. |
+| `idade_veiculo`, com recusa | Não é possível cotar veículo com {anos_min} a {anos_max} anos. {motivo} |
+| `regiao_cep` | CEPs com os prefixos {prefixos} são de alto risco, com multiplicador {multiplicador}. |
+| `carencia` | As coberturas {coberturas} têm carência de {dias} dias, contados da data de início da vigência. |
+| `pro_rata` | Quando a vigência começa no meio do mês, o primeiro pagamento é proporcional aos dias restantes do mês. Os meses seguintes são integrais. |
+
+A versão do modelo de frase faz parte da impressão digital do trecho. Mudar uma frase exige recalcular os trechos desse tipo, mesmo que os valores não tenham mudado.
+
+## 7. Impressões digitais
+
+- **Impressão digital da regra:** SHA-256 da representação canônica de `dados`, em JSON com chaves ordenadas e sem espaços.
+- **Impressão digital do trecho:** SHA-256 da concatenação do texto do trecho, do identificador do modelo e da versão dos modelos de frase.
+
+A impressão digital de um trecho é comparada com a gravada no banco. Se forem iguais, o trecho é pulado.
+
+## 8. Algoritmo da carga
+
+A carga inteira roda em uma única transação.
+
+1. Lê e valida `plans.json`.
+2. Grava ou atualiza os três planos em `regras.planos`.
+3. Para cada regra do arquivo, calcula a chave estável e a impressão digital. Cria a regra se não existir, ou atualiza `dados`, `impressao_digital` e `ativa` se mudou. Marca como ativa.
+4. Marca como inativa toda regra do banco cuja chave não apareceu no arquivo. Os trechos dessas regras continuam gravados, mas saem da busca.
+5. Para cada regra ativa, monta o texto do trecho e calcula a impressão digital do trecho.
+6. Compara com o trecho existente. Se for igual, pula. Se for diferente ou novo, acumula para embedar.
+7. Gera os embeddings em lote, com o embedder do e5, e grava os trechos alterados.
+8. Confere a dimensão de cada vetor, que deve ser 384. Se não for, a transação é revertida.
+9. Confirma a transação e emite o relatório: planos gravados, regras criadas, atualizadas, inalteradas e desativadas, e trechos reembedados.
+
+Se qualquer etapa falhar, nada é gravado. O relatório mostra a etapa e o erro.
+
+## 9. Embeddings
+
+- Os textos dos trechos são precedidos do prefixo `passage: `, conforme exigido pelo modelo e5 para documentos.
+- As consultas da busca, definidas no FDD-0004, são precedidas de `query: `. Esse prefixo é responsabilidade da busca, e não desta carga.
+- Os vetores são normalizados antes da gravação, para que a distância cosseno seja equivalente ao produto interno.
+- O modelo é carregado uma vez por execução da carga.
+
+## 10. Recálculo na troca de modelo
+
+Os trechos guardam o identificador e a dimensão do modelo, conforme a [[adr-0014-recalculo-na-troca-de-modelo]]. Se o modelo configurado for diferente do identificador gravado em algum trecho, a carga recalcula todos os trechos, e não só os alterados.
+
+## 11. Erros
+
+| Situação | Tratamento |
+| --- | --- |
+| `plans.json` ausente ou inválido | Interrompe antes de qualquer gravação |
+| Modelo não encontrado no diretório de cache | Tenta baixar. Se falhar, interrompe com mensagem clara |
+| Dimensão de vetor diferente de 384 | Reverte a transação |
+| Falha no banco | Reverte a transação e mostra o erro |
+
+## 12. Testes
+
+Os testes usam um banco real, do FDD-0004, e um embedder substituto que devolve vetores determinísticos de 384 posições. Nenhum modelo real é carregado nos testes.
+
+| Arquivo | O que verifica |
+| --- | --- |
+| `test_fonte.py` | Validação de campos obrigatórios e rejeição de arquivo inválido |
+| `test_textos.py` | Cada tipo de regra gera a frase esperada, inclusive a de recusa |
+| `test_carga.py` | Carga inicial, reexecução, alteração de um valor, remoção, falha e dimensão |
+
+**Casos de carga**
+
+- Carga inicial cria três planos e doze regras, com doze trechos embedados.
+- Reexecução sem mudança não chama o embedder.
+- Alterar um único valor recalcula apenas o trecho desse valor.
+- Remover uma faixa do arquivo deixa a regra inativa, e ela não aparece na busca.
+- Falha do embedder no meio da carga não grava nada.
+- Vetor de dimensão diferente de 384 reverte a transação.
+- Recarregar o catálogo mantém os mesmos identificadores de regra.
+
+## 13. Critérios de aceite técnicos
+
+1. A carga é idempotente: uma segunda execução sem mudança não altera nenhuma linha de trecho.
+2. Cada regra de `plans.json` gera exatamente um trecho.
+3. Nenhum trecho é embedado sem o prefixo de documento.
+4. Nenhum trecho é gravado com dimensão diferente de 384.
+5. Uma falha em qualquer etapa não deixa o banco parcialmente alterado.
+6. Os identificadores das regras são estáveis entre cargas.
+7. Os casos da seção 12 passam sem carregar o modelo real.
+
+## 14. Decisões de texto e crescimento
+
+- **Frase de recusa.** A recusa usa frase própria, com o motivo do `plans.json` como complemento.
+- **Crescimento do catálogo.** A carga inicial não tem paginação. Com o tamanho atual, a carga é rápida. Se o catálogo crescer muito, a carga passa a ser revisada.
+
+## 15. Decisões relacionadas
+
+- [[rfc-0004-geracao-de-embeddings]]: unidade de embedding, gatilho e recálculo.
+- [[rfc-0003-banco-postgres-pgvector]]: catálogo e trechos no banco.
+- [[fdd-0004-banco-e-migracoes]]: tabelas `regras.planos`, `regras.regras` e `regras.trechos`.
+- [[adr-0014-recalculo-na-troca-de-modelo]]: regra de recálculo na troca de modelo.
+==== docs/fdd/fdd-0002-cliente-da-cotacao.md
+---
+tipo: fdd
+status: aprovado
+data: 2026-11-09
+---
+
+# FDD-0002 — Cliente da cotação
+
+| Campo | Valor |
+| --- | --- |
+| **Autor** | Paulo (Tech Lead) |
+| **Status** | Aprovado |
+| **Data** | 2026-11-09 |
+| **Revisores** | João (Product Manager) |
+| **Origem** | [[fdd-0001-fluxo-de-conversa-e-coleta]] |
+| **Documentos relacionados** | [[rfc-0006-servico-de-cotacao]] · [[rfc-0005-modelo-llm-e-apis-externas]] · [[adr-0001-python-e-gerenciador]] · [[adr-0008-cliente-http-cotacao]] · [[adr-0010-valores-monetarios-decimal]] · [[adr-0011-logging-json-padrao]] · [[adr-0015-ferramenta-cotacao-schema-pydantic]] · [[adr-0016-biblioteca-de-testes-pytest]] |
+
+> **Nível deste documento.** Este FDD é de baixo nível e serve de base para a implementação. Descreve arquivos, contratos, comportamento de cada resposta, configuração e testes do cliente que chama o serviço de cotação.
+
+## 1. Escopo
+
+O cliente é o único módulo da aplicação que chama o serviço de cotação. Ele recebe os dados já validados pela conversa, chama o serviço para cada um dos três planos e devolve um resultado tipado para o agente.
+
+O cliente não valida regras de negócio. Idade fora da faixa, veículo antigo e região de risco são decididos pelo serviço, e o cliente apenas os traduz em resultado.
+
+## 2. Stack e dependências
+
+| Item | Escolha | Referência |
+| --- | --- | --- |
+| Linguagem | Python 3.12 | [[adr-0001-python-e-gerenciador]] |
+| Gerenciador | uv, com versões exatas no `uv.lock` | [[adr-0001-python-e-gerenciador]] |
+| Cliente HTTP | httpx, síncrono | [[adr-0008-cliente-http-cotacao]] |
+| Modelos de dados | Pydantic v2 | [[adr-0015-ferramenta-cotacao-schema-pydantic]] |
+| Valores monetários | `decimal.Decimal`, duas casas | [[adr-0010-valores-monetarios-decimal]] |
+| Logs | `logging` padrão, saída em JSON | [[adr-0011-logging-json-padrao]] |
+| Testes | pytest, com `httpx.MockTransport` | [[adr-0016-biblioteca-de-testes-pytest]] |
+
+Não há SDK externo neste módulo. O cliente não depende do LangChain nem do LangGraph, para que possa ser testado isoladamente.
+
+## 3. Estrutura de arquivos
+
+```
+autoseguro/
+  cotacao/
+    __init__.py      exporta a interface pública do módulo
+    config.py        URL base e constantes de timeout e retry
+    modelos.py       modelos Pydantic de entrada e de resultado
+    erros.py         exceções internas de transporte
+    cliente.py       CotacaoClient: chamadas HTTP, retry e mapeamento
+tests/
+  cotacao/
+    test_modelos.py
+    test_cliente.py
+```
+
+## 4. Configuração
+
+| Item | Origem | Valor padrão |
+| --- | --- | --- |
+| URL base do serviço | Variável `COTACAO_BASE_URL`, no `.env` | `http://localhost:8000` |
+| Timeout por tentativa | Constante em `config.py` | 5 segundos |
+| Prazo total da cotação | Constante em `config.py` | 15 segundos, para as três chamadas e retentativas |
+| Número de tentativas | Constante em `config.py` | 3 |
+| Esperas entre tentativas | Constante em `config.py` | 0,5 s e depois 1 s |
+| Jitter | Não existe | Esperas fixas |
+
+As constantes de timeout, tentativas e esperas ficam em código, e não no `.env`. Assim, os testes sempre rodam com os mesmos valores.
+
+## 5. Modelos de dados
+
+**Entrada, `CotacaoEntrada`**
+
+| Campo | Tipo | Observação |
+| --- | --- | --- |
+| `plano_id` | literal `essencial`, `completo` ou `premium` | Definido pelo cliente, um por chamada |
+| `idade` | inteiro | Já validado pela conversa |
+| `veiculo_ano` | inteiro | Já validado pela conversa |
+| `cep` | texto | Valor original do estado, nunca o marcador |
+| `data_inicio` | data no formato `YYYY-MM-DD` | Obrigatória para a cotação |
+
+O CEP vem do estado da conversa, conforme a [[rfc-0008-mascaramento-de-dados-pessoais]]. O modelo de linguagem não participa dessa montagem.
+
+**Resultado de um plano, `PlanoCotado`**
+
+| Campo | Tipo |
+| --- | --- |
+| `plano_id` | texto |
+| `plano_nome` | texto |
+| `premio_mensal` | `Decimal`, duas casas |
+| `franquia` | `Decimal`, duas casas |
+| `coberturas` | lista de textos |
+| `carencia_dias` | inteiro |
+| `primeiro_pagamento_pro_rata` | `Decimal` ou ausente |
+
+Os valores numéricos da resposta, que chegam como número de ponto flutuante, são convertidos com `Decimal(str(valor))`, arredondados para duas casas em `ROUND_HALF_UP`. A conversão é feita na entrada do módulo.
+
+**Resultado da cotação, `ResultadoCotacao`**
+
+Uma união de quatro casos, com `tipo` como discriminador:
+
+| `tipo` | Campos | Quando ocorre |
+| --- | --- | --- |
+| `sucesso` | `planos`: lista com os três `PlanoCotado` | Os três planos foram cotados |
+| `recusada` | `motivo`: texto | Regra de negócio recusou a cotação |
+| `indisponivel` | `motivo`: texto curto | Falha persistente após as tentativas |
+| `payload_invalido` | `detalhe`: texto | O serviço rejeitou o formato |
+
+O cliente devolve o resultado. Não lança exceção para casos previstos. Exceções ficam reservadas a erros de programação.
+
+## 6. Interface pública
+
+```
+CotacaoClient(base_url, transporte=None, sleep=time.sleep)
+    cotar(entrada: DadosCotacao) -> ResultadoCotacao
+```
+
+- `DadosCotacao` contém idade, ano, CEP e data de início, sem o plano.
+- `cotar` chama o serviço três vezes, uma para cada plano, em sequência.
+- O argumento `transporte` existe para os testes, que passam um `httpx.MockTransport`.
+- O argumento `sleep` existe para os testes, que substituem a espera por uma função que apenas registra as chamadas.
+
+**Agregação dos três planos**
+
+- Se os três planos retornarem sucesso, o resultado é `sucesso`.
+- Se qualquer plano retornar `recusada`, o resultado é `recusada`. A recusa é por idade ou veículo, e não depende do plano.
+- Se qualquer plano retornar `indisponivel`, o resultado é `indisponivel`, e os demais planos já obtidos não são exibidos.
+- Se qualquer plano retornar `payload_invalido`, o resultado é `payload_invalido`.
+
+A ordem de prioridade é `payload_invalido`, depois `recusada`, depois `indisponivel`. Um erro de payload indica bug, e deve aparecer antes de qualquer outra situação.
+
+## 7. Mapeamento das respostas HTTP
+
+| Situação | Ação | Resultado |
+| --- | --- | --- |
+| 200 | Converte o corpo nos modelos de plano | `sucesso` |
+| 422 com `error` igual a `cotacao_recusada` | Lê `motivo` | `recusada` |
+| 422 no formato de validação do FastAPI, com `detail` | Não retenta | `payload_invalido` |
+| 400 com `error` igual a `payload_invalido` | Não retenta | `payload_invalido` |
+| 500, 502 ou 503 | Retenta | `indisponivel` se esgotar |
+| Timeout de 5 segundos | Retenta | `indisponivel` se esgotar |
+| Erro de conexão | Retenta | `indisponivel` se esgotar |
+| Qualquer outro status | Não retenta | `indisponivel`, com log de status inesperado |
+| Corpo que não é JSON válido em 200 | Não retenta | `indisponivel`, com log de resposta malformada |
+
+A distinção entre os dois 422 é feita pelo corpo, conforme a [[rfc-0006-servico-de-cotacao]].
+
+## 8. Retry
+
+- Há até três tentativas por plano.
+- Entre a primeira e a segunda tentativa, espera 0,5 segundo. Entre a segunda e a terceira, espera 1 segundo.
+- As esperas são feitas pela função `sleep` injetada. Nenhuma espera acontece nos testes.
+- Só erros transitórios são retentados: 5xx, timeout e erro de conexão.
+- Respostas de negócio e de payload nunca são retentadas.
+
+A cotação completa tem prazo total de 15 segundos, contado desde a primeira chamada. Cada tentativa usa como timeout o menor valor entre 5 segundos e o tempo restante do prazo. Esperas também consomem o prazo.
+
+Quando o prazo acaba, a cotação é encerrada como `indisponivel`, mesmo que ainda houvesse tentativas, e os planos já obtidos não são exibidos.
+
+## 9. Timeout
+
+O timeout é de 5 segundos por tentativa, com `httpx.Timeout(5.0)`, limitado pelo tempo restante do prazo total da seção 8. Como o prazo total é de 15 segundos, um timeout consome um terço do prazo, e as retentativas e os demais planos ficam com o tempo restante.
+
+## 10. Logs
+
+Cada tentativa gera um registro de log, em JSON, com os campos:
+
+- nível, horário em UTC, evento e identificador da conversa;
+- plano, número da tentativa e status HTTP, quando houver;
+- duração da chamada, em milissegundos;
+- resultado da tentativa.
+
+O log nunca contém o corpo da requisição nem o CEP. A montagem do registro passa pelo mesmo critério de mascaramento da [[rfc-0008-mascaramento-de-dados-pessoais]].
+
+## 11. Testes
+
+Os testes usam `httpx.MockTransport` e a função `sleep` injetada. Não há chamada de rede.
+
+| Caso | Entrada simulada | Resultado esperado |
+| --- | --- | --- |
+| Cotação completa | 200 para os três planos | `sucesso`, com valores em `Decimal` |
+| Recusa por regra | 422 com `cotacao_recusada` | `recusada`, com o motivo |
+| Payload inválido | 422 no formato FastAPI | `payload_invalido` |
+| Falha transitória e recuperação | 503 na primeira tentativa e 200 na segunda | `sucesso`, com uma espera de 0,5 s |
+| Falha persistente | 503 nas três tentativas | `indisponivel`, com esperas de 0,5 s e 1 s |
+| Timeout | Exceção de timeout nas três tentativas | `indisponivel` |
+| Erro de conexão | Exceção de conexão na primeira tentativa | Retenta e recupera |
+| Status inesperado | 418 | `indisponivel`, sem retry |
+| Conversão de valores | Prêmio `119.9` | `Decimal("119.90")` |
+| Conversão com arredondamento | Prêmio `10.005` | `Decimal("10.01")` |
+| Log sem dado pessoal | Chamada com CEP | Nenhum registro contém o CEP |
+
+## 12. Critérios de aceite técnicos
+
+1. O cliente chama o serviço apenas com os dados recebidos, sem completar nem alterar valores.
+2. Nenhum valor monetário é representado por ponto flutuante após a conversão.
+3. Erros transitórios são retentados exatamente até três tentativas, com as esperas de 0,5 s e 1 s.
+4. Respostas 422 e 400 nunca são retentadas.
+5. Todos os casos da seção 11 passam sem chamada de rede.
+6. Nenhum registro de log contém o CEP ou o corpo da requisição.
+7. Nenhuma cotação completa ultrapassa 15 segundos, incluindo retentativas.
+
+## 13. Decisões de prazo
+
+- **Prazo total de 15 segundos** para a cotação completa, conforme decisão do usuário.
+- **Timeout é falha transitória.** Um timeout é retentado como um 5xx, com as mesmas tentativas e esperas.
+- **Consequência:** se um plano atingir timeout na primeira tentativa, sobra cerca de 10 segundos para os demais planos e as retentativas. Isso pode resultar em `indisponivel` com mais frequência do que o pior caso de tentativas isoladas sugere.
+
+## 14. Decisões relacionadas
+
+- [[fdd-0001-fluxo-de-conversa-e-coleta]]: origem das regras de coleta.
+- [[rfc-0006-servico-de-cotacao]]: contrato do serviço e comportamento de erro.
+- [[rfc-0005-modelo-llm-e-apis-externas]]: política de retry para erros da API.
+- [[adr-0008-cliente-http-cotacao]]: escolha do cliente HTTP e do timeout.
+==== docs/fdd/fdd-0006-observabilidade.md
+---
+tipo: fdd
+status: aprovado
+data: 2026-11-09
+---
+
+# FDD-0006 — Observabilidade com LangSmith
+
+| Campo | Valor |
+| --- | --- |
+| **Autor** | Paulo (Tech Lead) |
+| **Status** | Aprovado |
+| **Data** | 2026-11-09 |
+| **Revisores** | João (Product Manager) |
+| **Origem** | [[rfc-0002-integracao-langsmith]] |
+| **Documentos relacionados** | [[rfc-0008-mascaramento-de-dados-pessoais]] · [[rfc-0009-juiz-e-regras-de-validacao]] · [[rfc-0011-avaliacao-e-testes]] · [[adr-0011-logging-json-padrao]] · [[adr-0017-metadados-de-trace-dicionario-unico]] · [[fdd-0003-mascaramento-de-dados-pessoais]] · [[fdd-0004-banco-e-migracoes]] · [[fdd-0005-agente]] |
+
+> **Nível deste documento.** Este FDD é de baixo nível e serve de base para a implementação. Descreve a configuração do LangSmith, a redação antes do envio, as chaves de metadado, as tags, o registro de feedback do juiz e os testes da integração.
+
+## 1. Escopo
+
+Cada turno do agente gera um trace no LangSmith, com a árvore de execução dos nós, as chamadas ao modelo e as chamadas à ferramenta de cotação. O juiz registra sua decisão como feedback do trace. A identificação do trace fica gravada na conversa.
+
+Todo conteúdo enviado ao LangSmith passa pela redação de dados pessoais antes do envio. Se a redação falhar, o trace não é enviado.
+
+## 2. Stack e dependências
+
+| Item | Escolha | Referência |
+| --- | --- | --- |
+| SDK de tracing | `langsmith`, na versão do lock | [[rfc-0002-integracao-langsmith]] |
+| Integração com o LangChain | Tracing nativo, ativado por variável de ambiente | [[adr-0007-cliente-modelo-chatanthropic]] |
+| Redação antes do envio | Função passada ao cliente do LangSmith | [[rfc-0008-mascaramento-de-dados-pessoais]] |
+| Chaves de metadado | Dicionário único | [[adr-0017-metadados-de-trace-dicionario-unico]] |
+| Logs | `logging` padrão, em JSON | [[adr-0011-logging-json-padrao]] |
+
+## 3. Configuração
+
+| Variável | Origem | Valor |
+| --- | --- | --- |
+| `LANGSMITH_API_KEY` | `.env` | Chave da conta gratuita e pública |
+| `LANGSMITH_TRACING` | `.env` ou código de execução | `true` na demonstração e na avaliação. `false` nos testes |
+| `LANGSMITH_PROJECT` | Constante do módulo | `autoseguro-mvp` |
+
+A chave nunca é gravada em log nem em trace. O módulo de configuração não expõe o valor da chave em nenhuma representação.
+
+## 4. Estrutura de arquivos
+
+```
+autoseguro/
+  observabilidade/
+    __init__.py
+    config.py        leitura da configuração e do modo de execução
+    chaves.py        dicionário único de chaves de metadado e de tags
+    redacao.py       função de redação aplicada antes do envio
+    cliente.py       construção do cliente do LangSmith com a redação
+    feedback.py      registro da decisão do juiz como feedback
+tests/
+  observabilidade/
+    test_redacao.py
+    test_chaves.py
+    test_feedback.py
+    test_envio.py
+```
+
+## 5. Chaves de metadado e tags
+
+Todas as chaves vêm de `chaves.py`. Nenhuma etapa cria uma chave fora desse módulo, conforme a [[adr-0017-metadados-de-trace-dicionario-unico]].
+
+| Chave | Valor | Onde aparece |
+| --- | --- | --- |
+| `conversa_id` | UUID da conversa | Metadado do turno |
+| `versao_prompt` | Versão do roteiro usado | Metadado de cada chamada ao modelo |
+| `modelo` | Identificador exato do modelo | Metadado de cada chamada ao modelo |
+| `etapa` | Nome do nó do grafo | Metadado de cada nó |
+| `tipo_execucao` | Uma das tags da seção 6 | Metadado do turno |
+
+**Tags**
+
+| Tag | Quando |
+| --- | --- |
+| `teste` | Execuções dos testes e de desenvolvimento |
+| `demonstracao` | Conversas feitas na interface simulada |
+| `avaliacao` | Execuções das rodadas da [[rfc-0011-avaliacao-e-testes]] |
+
+A tag é definida pelo ponto de entrada da execução. A interface define `demonstracao`, e a rodada de avaliação define `avaliacao`.
+
+## 6. Redação antes do envio
+
+A função `redacao.py` recebe o conteúdo de cada run antes do envio.
+
+1. Entradas e saídas de texto são passadas por `mascarar_entrada` ou `mascarar_saida`, conforme a [[fdd-0003-mascaramento-de-dados-pessoais]].
+2. Campos que contenham valores originais de CPF ou CEP, vindos do estado, são substituídos pelos marcadores. A verificação é por nome do campo e pelo conteúdo.
+3. A função devolve o payload redigido. Nunca devolve o payload original.
+4. Se a função lançar qualquer exceção, o run é descartado. Nenhum conteúdo do run é enviado, e um registro de erro é emitido pelo módulo de logs, sem o conteúdo do run.
+
+O cliente é construído em `cliente.py` com a função de redação aplicada às entradas e às saídas de cada run.
+
+## 7. Vínculo entre conversa e trace
+
+Na primeira execução de um turno, o identificador do trace raiz é gravado em `registro.referencias_trace`, junto com a conversa, conforme a [[fdd-0004-banco-e-migracoes]]. Nos turnos seguintes, a referência é reaproveitada, e não é regravada.
+
+Se a gravação da referência falhar, o turno segue normalmente. A falha é registrada em log, sem o conteúdo do turno.
+
+## 8. Feedback do juiz
+
+Cada decisão do juiz gera um feedback no trace do turno, em `feedback.py`.
+
+| Chave do feedback | Pontuação | Comentário |
+| --- | --- | --- |
+| `juiz_regra_1` | 1 se os valores são oficiais, 0 se não | Motivo curto, sem valor |
+| `juiz_regra_2` a `juiz_regra_4` | 1 se aprovado, 0 se reprovado | Motivo curto, sem valor |
+| `juiz_decisao` | 1 se aprovado, 0 se reprovado | Regra violada, se houver |
+
+O comentário nunca contém valor de preço, CPF nem CEP. O motivo é o código da regra e uma frase curta, vinda da saída do juiz.
+
+Se a gravação do feedback falhar, a decisão do juiz continua válida para a conversa. A falha é registrada em log.
+
+## 9. Pontos de envio e independência
+
+- O envio dos traces é assíncrono. O agente não espera o envio para responder ao lead.
+- Uma falha no envio não altera a resposta enviada ao lead, nem o status da conversa.
+- O tempo de envio não entra no tempo de resposta do turno.
+
+## 10. Custo
+
+Os traces guardam, para cada chamada ao modelo, a contagem de tokens de entrada e saída. A soma por turno é gravada em `tokens_consumidos` do estado, conforme a [[fdd-0005-agente]]. O custo em dinheiro é calculado a partir dessas contagens, por modelo, e acompanhado por agente e juiz, conforme a [[rfc-0005-modelo-llm-e-apis-externas]].
+
+## 11. Logs
+
+Cada tentativa de envio gera um registro de log, em JSON, com:
+
+- nível, horário em UTC e evento;
+- identificador da conversa;
+- resultado do envio: enviado, descartado por falha de redação, ou falha de envio;
+- número de runs envolvidos.
+
+O log nunca contém conteúdo de run.
+
+## 12. Testes
+
+Os testes não enviam nada ao LangSmith. O cliente é substituído por um dublê que captura os payloads.
+
+| Arquivo | O que verifica |
+| --- | --- |
+| `test_redacao.py` | Nenhum CPF, CEP, e-mail, telefone ou placa aparece no payload redigido. Falha da redação resulta em descarte |
+| `test_chaves.py` | As chaves usadas nas etapas existem no dicionário, e nenhuma chave fora dele é usada |
+| `test_feedback.py` | Cada regra do juiz gera a pontuação e o comentário esperados, sem valor |
+| `test_envio.py` | Falha do envio não altera a resposta ao lead nem o status da conversa |
+
+**Casos de redação**
+
+- Texto com CPF, CEP e telefone, na entrada: os três aparecem como marcadores.
+- Resposta com valor de preço: o valor permanece, porque não é dado pessoal.
+- Payload com exceção na redação: o run não é enviado, e o log não contém o conteúdo.
+- Execução com `LANGSMITH_TRACING` igual a `false`: nenhum payload é capturado.
+
+## 13. Critérios de aceite técnicos
+
+1. Nenhum payload enviado ao LangSmith contém CPF, CEP, e-mail, telefone ou placa em texto.
+2. Nenhum payload enviado contém o valor original de CPF ou CEP do estado.
+3. Quando a redação falha, nenhum conteúdo do run é enviado.
+4. A chave do LangSmith não aparece em log, trace nem mensagem de erro.
+5. Cada turno tem tag, `conversa_id` e `modelo` nos metadados.
+6. A decisão do juiz é registrada como feedback, sem valor no comentário.
+7. Falha do envio não altera a resposta enviada ao lead.
+
+## 14. Decisões de descarte e feedback
+
+- **Descarte de run.** Se a versão do SDK fixada não permitir descartar um run antes do envio, a própria aplicação bloqueia a chamada de rede quando a redação falha. A regra de falha fechada se mantém, sem depender de recurso do SDK.
+- **Nomes do feedback.** As chaves `juiz_regra_1` a `juiz_regra_4` e `juiz_decisao` são mantidas, e ficam no módulo `chaves.py`.
+
+## 15. Decisões relacionadas
+
+- [[rfc-0002-integracao-langsmith]]: integração com o LangSmith.
+- [[rfc-0008-mascaramento-de-dados-pessoais]]: regras de redação.
+- [[rfc-0009-juiz-e-regras-de-validacao]]: decisões do juiz registradas como feedback.
+- [[fdd-0005-agente]]: nós e turnos que geram os traces.

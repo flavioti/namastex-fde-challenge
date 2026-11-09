@@ -1,0 +1,1834 @@
+<ide_diagnostics>[
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 20,
+    "column": 1,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the right for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 20,
+    "column": 5,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the left for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 20,
+    "column": 5,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the right for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 20,
+    "column": 9,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the left for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 20,
+    "column": 9,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the right for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 20,
+    "column": 13,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the left for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 50,
+    "column": 1,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the right for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 50,
+    "column": 5,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the left for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 50,
+    "column": 5,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the right for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 50,
+    "column": 9,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the left for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 50,
+    "column": 9,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the right for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 50,
+    "column": 13,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the left for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 65,
+    "column": 1,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the right for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 65,
+    "column": 5,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the left for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 65,
+    "column": 5,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the right for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 65,
+    "column": 9,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the left for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 65,
+    "column": 9,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the right for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 65,
+    "column": 13,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the left for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 65,
+    "column": 13,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the right for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 65,
+    "column": 17,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the left for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 74,
+    "column": 1,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the right for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 74,
+    "column": 5,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the left for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 74,
+    "column": 5,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the right for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 74,
+    "column": 9,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the left for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 74,
+    "column": 9,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the right for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 74,
+    "column": 13,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the left for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 74,
+    "column": 13,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the right for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 74,
+    "column": 17,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the left for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 123,
+    "column": 1,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the right for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 123,
+    "column": 5,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the left for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 123,
+    "column": 5,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the right for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 123,
+    "column": 9,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the left for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 123,
+    "column": 9,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the right for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 123,
+    "column": 13,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the left for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 136,
+    "column": 1,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the right for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 136,
+    "column": 5,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the left for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 136,
+    "column": 5,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the right for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 136,
+    "column": 9,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the left for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 136,
+    "column": 9,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the right for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 136,
+    "column": 13,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the left for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 136,
+    "column": 13,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the right for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 136,
+    "column": 17,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the left for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 136,
+    "column": 17,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the right for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 136,
+    "column": 21,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the left for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 155,
+    "column": 1,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the right for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 155,
+    "column": 5,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the left for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 155,
+    "column": 5,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the right for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 155,
+    "column": 9,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the left for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 155,
+    "column": 9,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the right for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 155,
+    "column": 13,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the left for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 169,
+    "column": 1,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the right for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 169,
+    "column": 5,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the left for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 169,
+    "column": 5,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the right for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 169,
+    "column": 9,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the left for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 169,
+    "column": 9,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the right for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 169,
+    "column": 13,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the left for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 186,
+    "column": 1,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the right for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 186,
+    "column": 5,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the left for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 186,
+    "column": 5,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the right for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 186,
+    "column": 9,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the left for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 186,
+    "column": 9,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the right for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 186,
+    "column": 13,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the left for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 186,
+    "column": 13,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the right for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 186,
+    "column": 17,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the left for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 200,
+    "column": 1,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the right for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 200,
+    "column": 5,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the left for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 200,
+    "column": 5,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the right for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 200,
+    "column": 9,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the left for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 200,
+    "column": 9,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the right for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 200,
+    "column": 13,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the left for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 200,
+    "column": 13,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the right for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 200,
+    "column": 17,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the left for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 214,
+    "column": 1,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the right for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 214,
+    "column": 5,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the left for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 214,
+    "column": 5,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the right for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 214,
+    "column": 9,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the left for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 214,
+    "column": 9,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the right for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 214,
+    "column": 13,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the left for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 214,
+    "column": 13,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the right for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 214,
+    "column": 17,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the left for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 226,
+    "column": 1,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the right for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 226,
+    "column": 5,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the left for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 226,
+    "column": 5,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the right for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 226,
+    "column": 9,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the left for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 226,
+    "column": 9,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the right for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 226,
+    "column": 13,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the left for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 226,
+    "column": 13,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the right for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 226,
+    "column": 17,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the left for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 239,
+    "column": 1,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the right for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 239,
+    "column": 5,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the left for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 239,
+    "column": 5,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the right for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 239,
+    "column": 9,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the left for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 239,
+    "column": 9,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the right for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 239,
+    "column": 13,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the left for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 239,
+    "column": 13,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the right for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 239,
+    "column": 17,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the left for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 256,
+    "column": 1,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the right for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 256,
+    "column": 5,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the left for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 256,
+    "column": 5,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the right for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 256,
+    "column": 9,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the left for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 256,
+    "column": 9,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the right for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 256,
+    "column": 13,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the left for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 256,
+    "column": 13,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the right for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 256,
+    "column": 17,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the left for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 256,
+    "column": 17,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the right for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 256,
+    "column": 21,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the left for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 264,
+    "column": 1,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the right for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 264,
+    "column": 5,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the left for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 264,
+    "column": 5,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the right for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 264,
+    "column": 9,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the left for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 264,
+    "column": 9,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the right for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 264,
+    "column": 13,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the left for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 264,
+    "column": 13,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the right for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 264,
+    "column": 17,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the left for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 282,
+    "column": 1,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the right for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 282,
+    "column": 5,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the left for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 282,
+    "column": 5,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the right for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 282,
+    "column": 9,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the left for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 282,
+    "column": 9,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the right for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 282,
+    "column": 13,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the left for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 289,
+    "column": 1,
+    "message": "MD036/no-emphasis-as-heading: Emphasis used instead of a heading",
+    "code": "MD036",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 292,
+    "column": 1,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the right for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 292,
+    "column": 5,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the left for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 292,
+    "column": 5,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the right for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 292,
+    "column": 9,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the left for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 292,
+    "column": 9,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the right for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 292,
+    "column": 13,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the left for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 292,
+    "column": 13,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the right for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 292,
+    "column": 17,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the left for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 292,
+    "column": 17,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the right for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 292,
+    "column": 21,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the left for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 329,
+    "column": 1,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the right for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 329,
+    "column": 5,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the left for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 329,
+    "column": 5,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the right for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 329,
+    "column": 9,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the left for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 329,
+    "column": 9,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the right for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 329,
+    "column": 13,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the left for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 329,
+    "column": 13,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the right for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 329,
+    "column": 17,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the left for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 329,
+    "column": 17,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the right for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 329,
+    "column": 21,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the left for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 367,
+    "column": 1,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the right for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 367,
+    "column": 5,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the left for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 367,
+    "column": 5,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the right for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 367,
+    "column": 9,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the left for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 367,
+    "column": 9,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the right for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 367,
+    "column": 13,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the left for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 367,
+    "column": 13,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the right for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 367,
+    "column": 17,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the left for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 384,
+    "column": 1,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the right for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 384,
+    "column": 5,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the left for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 384,
+    "column": 5,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the right for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 384,
+    "column": 9,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the left for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 384,
+    "column": 9,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the right for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 384,
+    "column": 13,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the left for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 384,
+    "column": 13,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the right for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 384,
+    "column": 17,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the left for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 398,
+    "column": 1,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the right for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 398,
+    "column": 5,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the left for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 398,
+    "column": 5,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the right for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 398,
+    "column": 9,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the left for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 398,
+    "column": 9,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the right for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 398,
+    "column": 13,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the left for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 398,
+    "column": 13,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the right for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 398,
+    "column": 17,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the left for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 398,
+    "column": 17,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the right for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 398,
+    "column": 21,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the left for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 409,
+    "column": 1,
+    "message": "MD001/heading-increment: Heading levels should only increment by one level at a time [Expected: h4; Actual: h5]",
+    "code": "MD001",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 411,
+    "column": 1,
+    "message": "MD036/no-emphasis-as-heading: Emphasis used instead of a heading",
+    "code": "MD036",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 423,
+    "column": 1,
+    "message": "MD036/no-emphasis-as-heading: Emphasis used instead of a heading",
+    "code": "MD036",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 436,
+    "column": 1,
+    "message": "MD036/no-emphasis-as-heading: Emphasis used instead of a heading",
+    "code": "MD036",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 453,
+    "column": 1,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the right for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 453,
+    "column": 5,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the left for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 453,
+    "column": 5,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the right for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 453,
+    "column": 9,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the left for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 453,
+    "column": 9,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the right for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 453,
+    "column": 13,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the left for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 453,
+    "column": 13,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the right for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 453,
+    "column": 17,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the left for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 469,
+    "column": 1,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the right for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 469,
+    "column": 5,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the left for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 469,
+    "column": 5,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the right for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 469,
+    "column": 9,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the left for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 469,
+    "column": 9,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the right for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 469,
+    "column": 13,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the left for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 469,
+    "column": 13,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the right for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 469,
+    "column": 17,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the left for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 469,
+    "column": 17,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the right for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 469,
+    "column": 21,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the left for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 469,
+    "column": 21,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the right for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 469,
+    "column": 25,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the left for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 484,
+    "column": 1,
+    "message": "MD036/no-emphasis-as-heading: Emphasis used instead of a heading",
+    "code": "MD036",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 487,
+    "column": 1,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the right for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 487,
+    "column": 5,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the left for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 487,
+    "column": 5,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the right for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 487,
+    "column": 9,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the left for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 487,
+    "column": 9,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the right for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 487,
+    "column": 13,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the left for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 487,
+    "column": 13,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the right for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 487,
+    "column": 17,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the left for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 496,
+    "column": 1,
+    "message": "MD036/no-emphasis-as-heading: Emphasis used instead of a heading",
+    "code": "MD036",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 499,
+    "column": 1,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the right for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 499,
+    "column": 5,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the left for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 499,
+    "column": 5,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the right for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 499,
+    "column": 9,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the left for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 499,
+    "column": 9,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the right for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 499,
+    "column": 13,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the left for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 499,
+    "column": 13,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the right for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 499,
+    "column": 17,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the left for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 509,
+    "column": 1,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the right for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 509,
+    "column": 5,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the left for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 509,
+    "column": 5,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the right for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 509,
+    "column": 9,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the left for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 509,
+    "column": 9,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the right for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 509,
+    "column": 13,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the left for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 509,
+    "column": 13,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the right for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 509,
+    "column": 17,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the left for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 509,
+    "column": 17,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the right for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 509,
+    "column": 21,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the left for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 509,
+    "column": 21,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the right for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 509,
+    "column": 25,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the left for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 527,
+    "column": 1,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the right for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 527,
+    "column": 5,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the left for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 527,
+    "column": 5,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the right for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 527,
+    "column": 9,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the left for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 527,
+    "column": 9,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the right for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 527,
+    "column": 13,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the left for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 527,
+    "column": 13,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the right for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/docs/prd/prd 0001 - overview.md",
+    "line": 527,
+    "column": 17,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the left for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  }
+]</ide_diagnostics>

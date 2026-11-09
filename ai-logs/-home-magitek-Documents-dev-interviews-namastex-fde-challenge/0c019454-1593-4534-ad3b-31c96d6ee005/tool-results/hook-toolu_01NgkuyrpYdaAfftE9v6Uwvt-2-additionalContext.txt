@@ -1,0 +1,322 @@
+<ide_diagnostics>[
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/context-engineering/2 - gerar rfc.md",
+    "line": 20,
+    "column": 1,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the right for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/context-engineering/2 - gerar rfc.md",
+    "line": 20,
+    "column": 5,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the left for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/context-engineering/2 - gerar rfc.md",
+    "line": 20,
+    "column": 5,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the right for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/context-engineering/2 - gerar rfc.md",
+    "line": 20,
+    "column": 9,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the left for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/context-engineering/2 - gerar rfc.md",
+    "line": 20,
+    "column": 9,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the right for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/context-engineering/2 - gerar rfc.md",
+    "line": 20,
+    "column": 13,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the left for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/context-engineering/2 - gerar rfc.md",
+    "line": 35,
+    "column": 1,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the right for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/context-engineering/2 - gerar rfc.md",
+    "line": 35,
+    "column": 5,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the left for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/context-engineering/2 - gerar rfc.md",
+    "line": 35,
+    "column": 5,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the right for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/context-engineering/2 - gerar rfc.md",
+    "line": 35,
+    "column": 9,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the left for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/context-engineering/2 - gerar rfc.md",
+    "line": 64,
+    "column": 1,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the right for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/context-engineering/2 - gerar rfc.md",
+    "line": 64,
+    "column": 5,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the left for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/context-engineering/2 - gerar rfc.md",
+    "line": 64,
+    "column": 5,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the right for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/context-engineering/2 - gerar rfc.md",
+    "line": 64,
+    "column": 9,
+    "message": "MD060/table-column-style: Table column style [Table pipe is missing space to the left for style \"compact\"]",
+    "code": "MD060",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/context-engineering/2 - gerar rfc.md",
+    "line": 73,
+    "column": 1,
+    "message": "MD032/blanks-around-lists: Lists should be surrounded by blank lines",
+    "code": "MD032",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/context-engineering/2 - gerar rfc.md",
+    "line": 82,
+    "column": 1,
+    "message": "MD022/blanks-around-headings: Headings should be surrounded by blank lines [Expected: 1; Actual: 0; Below]",
+    "code": "MD022",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/context-engineering/2 - gerar rfc.md",
+    "line": 85,
+    "column": 1,
+    "message": "MD022/blanks-around-headings: Headings should be surrounded by blank lines [Expected: 1; Actual: 0; Below]",
+    "code": "MD022",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/context-engineering/2 - gerar rfc.md",
+    "line": 88,
+    "column": 1,
+    "message": "MD022/blanks-around-headings: Headings should be surrounded by blank lines [Expected: 1; Actual: 0; Below]",
+    "code": "MD022",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/context-engineering/2 - gerar rfc.md",
+    "line": 91,
+    "column": 1,
+    "message": "MD022/blanks-around-headings: Headings should be surrounded by blank lines [Expected: 1; Actual: 0; Below]",
+    "code": "MD022",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/context-engineering/2 - gerar rfc.md",
+    "line": 94,
+    "column": 1,
+    "message": "MD022/blanks-around-headings: Headings should be surrounded by blank lines [Expected: 1; Actual: 0; Below]",
+    "code": "MD022",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/context-engineering/2 - gerar rfc.md",
+    "line": 96,
+    "column": 1,
+    "message": "MD032/blanks-around-lists: Lists should be surrounded by blank lines",
+    "code": "MD032",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/context-engineering/2 - gerar rfc.md",
+    "line": 101,
+    "column": 1,
+    "message": "MD022/blanks-around-headings: Headings should be surrounded by blank lines [Expected: 1; Actual: 0; Below]",
+    "code": "MD022",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/context-engineering/2 - gerar rfc.md",
+    "line": 104,
+    "column": 1,
+    "message": "MD022/blanks-around-headings: Headings should be surrounded by blank lines [Expected: 1; Actual: 0; Below]",
+    "code": "MD022",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/context-engineering/2 - gerar rfc.md",
+    "line": 107,
+    "column": 1,
+    "message": "MD022/blanks-around-headings: Headings should be surrounded by blank lines [Expected: 1; Actual: 0; Below]",
+    "code": "MD022",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/context-engineering/2 - gerar rfc.md",
+    "line": 110,
+    "column": 1,
+    "message": "MD022/blanks-around-headings: Headings should be surrounded by blank lines [Expected: 1; Actual: 0; Below]",
+    "code": "MD022",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/context-engineering/2 - gerar rfc.md",
+    "line": 113,
+    "column": 1,
+    "message": "MD022/blanks-around-headings: Headings should be surrounded by blank lines [Expected: 1; Actual: 0; Below]",
+    "code": "MD022",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/context-engineering/2 - gerar rfc.md",
+    "line": 116,
+    "column": 1,
+    "message": "MD022/blanks-around-headings: Headings should be surrounded by blank lines [Expected: 1; Actual: 0; Below]",
+    "code": "MD022",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/context-engineering/2 - gerar rfc.md",
+    "line": 119,
+    "column": 1,
+    "message": "MD022/blanks-around-headings: Headings should be surrounded by blank lines [Expected: 1; Actual: 0; Below]",
+    "code": "MD022",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/context-engineering/2 - gerar rfc.md",
+    "line": 126,
+    "column": 1,
+    "message": "MD022/blanks-around-headings: Headings should be surrounded by blank lines [Expected: 1; Actual: 0; Below]",
+    "code": "MD022",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/context-engineering/2 - gerar rfc.md",
+    "line": 127,
+    "column": 1,
+    "message": "MD032/blanks-around-lists: Lists should be surrounded by blank lines",
+    "code": "MD032",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/context-engineering/2 - gerar rfc.md",
+    "line": 133,
+    "column": 1,
+    "message": "MD022/blanks-around-headings: Headings should be surrounded by blank lines [Expected: 1; Actual: 0; Below]",
+    "code": "MD022",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/context-engineering/2 - gerar rfc.md",
+    "line": 134,
+    "column": 1,
+    "message": "MD032/blanks-around-lists: Lists should be surrounded by blank lines",
+    "code": "MD032",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/context-engineering/2 - gerar rfc.md",
+    "line": 141,
+    "column": 1,
+    "message": "MD022/blanks-around-headings: Headings should be surrounded by blank lines [Expected: 1; Actual: 0; Below]",
+    "code": "MD022",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/context-engineering/2 - gerar rfc.md",
+    "line": 142,
+    "column": 1,
+    "message": "MD032/blanks-around-lists: Lists should be surrounded by blank lines",
+    "code": "MD032",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/context-engineering/2 - gerar rfc.md",
+    "line": 148,
+    "column": 1,
+    "message": "MD022/blanks-around-headings: Headings should be surrounded by blank lines [Expected: 1; Actual: 0; Below]",
+    "code": "MD022",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/context-engineering/2 - gerar rfc.md",
+    "line": 149,
+    "column": 1,
+    "message": "MD032/blanks-around-lists: Lists should be surrounded by blank lines",
+    "code": "MD032",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/context-engineering/2 - gerar rfc.md",
+    "line": 157,
+    "column": 1,
+    "message": "MD022/blanks-around-headings: Headings should be surrounded by blank lines [Expected: 1; Actual: 0; Below]",
+    "code": "MD022",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/context-engineering/2 - gerar rfc.md",
+    "line": 158,
+    "column": 1,
+    "message": "MD032/blanks-around-lists: Lists should be surrounded by blank lines",
+    "code": "MD032",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/context-engineering/2 - gerar rfc.md",
+    "line": 165,
+    "column": 1,
+    "message": "MD022/blanks-around-headings: Headings should be surrounded by blank lines [Expected: 1; Actual: 0; Below]",
+    "code": "MD022",
+    "severity": "Warning"
+  },
+  {
+    "filePath": "/home/magitek/Documents/dev/interviews/namastex-fde-challenge/context-engineering/2 - gerar rfc.md",
+    "line": 166,
+    "column": 1,
+    "message": "MD032/blanks-around-lists: Lists should be surrounded by blank lines",
+    "code": "MD032",
+    "severity": "Warning"
+  }
+]</ide_diagnostics>
