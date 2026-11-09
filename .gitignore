@@ -9,6 +9,8 @@ venv/
 # env / secrets (NUNCA commitar)
 .env
 .env.*
+# modelo de configuração, versionado sem valores (RFC-0012)
+!.env.example
 *.key
 *.pem
 

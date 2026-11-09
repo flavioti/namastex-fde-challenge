@@ -1,0 +1,11 @@
+# Listas para gerar leads fictícios na simulação (FDD-0007, seção 8).
+# Editável sem mudança de código. Os telefones gerados são fictícios.
+
+[nomes]
+primeiros = ["Ana", "Bruno", "Carla", "Diego", "Elaine", "Fábio", "Gabriela", "Henrique",
+             "Isabela", "João", "Larissa", "Marcos", "Natália", "Otávio", "Paula", "Rafael"]
+sobrenomes = ["Souza", "Oliveira", "Pereira", "Costa", "Rodrigues", "Almeida",
+              "Nascimento", "Lima", "Araújo", "Ribeiro"]
+
+[telefone]
+ddds = [11, 21, 31, 41, 47, 51, 61, 71, 81, 85]

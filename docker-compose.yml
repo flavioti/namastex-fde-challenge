@@ -1,4 +1,23 @@
 services:
+  banco:
+    # Postgres 18 com pgvector: versão maior mais recente disponível com pgvector (RFC-0003, FDD-0004)
+    image: pgvector/pgvector:pg18
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:?defina POSTGRES_USER no .env}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?defina POSTGRES_PASSWORD no .env}
+      POSTGRES_DB: ${POSTGRES_DB:?defina POSTGRES_DB no .env}
+    ports:
+      - "5432:5432"
+    volumes:
+      # Dados persistentes na raiz do projeto. Não versionado (.gitignore).
+      - ./database:/var/lib/postgresql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+    restart: unless-stopped
+
   quote-api:
     build: ./quote-service
     ports:
