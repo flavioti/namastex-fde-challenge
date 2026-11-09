@@ -1,0 +1,393 @@
+{
+  "meta": {
+    "titulo": "AutoSeguro — interface",
+    "selo": "subsistema interface · 2026-11-09",
+    "atualizado": "2026-11-09",
+    "documentos_lidos": [
+      "[[fdd-0007-interface-simulacao]]",
+      "[[rfc-0001-simulador-de-conversa]]"
+    ]
+  },
+  "nodes": {
+    "lead": {
+      "type": "phone",
+      "x": 120,
+      "y": 300,
+      "label": "lead",
+      "status": "proposto",
+      "fonte": "[[rfc-0001-simulador-de-conversa]]"
+    },
+    "conversas": {
+      "type": "app",
+      "x": 380,
+      "y": 120,
+      "label": "conversas",
+      "status": "decidido",
+      "fonte": "[[fdd-0007-interface-simulacao]] [[adr-0009-identificadores-uuid]]"
+    },
+    "chat": {
+      "type": "app",
+      "x": 380,
+      "y": 300,
+      "label": "chat",
+      "status": "decidido",
+      "fonte": "[[fdd-0007-interface-simulacao]] [[adr-0012-datas-utc-e-exibicao-brasil]]"
+    },
+    "agente": {
+      "type": "app",
+      "x": 640,
+      "y": 300,
+      "label": "agente",
+      "status": "decidido",
+      "fonte": "[[fdd-0005-agente]] [[adr-0006-estado-do-grafo-pydantic]]"
+    },
+    "respondedor": {
+      "type": "app",
+      "x": 640,
+      "y": 170,
+      "label": "respondedor",
+      "status": "futuro",
+      "future": true,
+      "fonte": "[[rfc-0001-simulador-de-conversa]] [[fdd-0007-interface-simulacao]]"
+    },
+    "painel": {
+      "type": "app",
+      "x": 640,
+      "y": 520,
+      "label": "painel",
+      "status": "decidido",
+      "fonte": "[[fdd-0007-interface-simulacao]] [[adr-0010-valores-monetarios-decimal]]"
+    },
+    "registro": {
+      "type": "db",
+      "x": 380,
+      "y": 520,
+      "label": "registro",
+      "status": "decidido",
+      "fonte": "[[fdd-0004-banco-e-migracoes]] [[adr-0018-mensagens-em-tabela-propria]]"
+    },
+    "encaminhados": {
+      "type": "app",
+      "x": 900,
+      "y": 520,
+      "label": "encaminhados",
+      "status": "decidido",
+      "fonte": "[[fdd-0007-interface-simulacao]] [[adr-0009-identificadores-uuid]]"
+    },
+    "trava": {
+      "type": "app",
+      "x": 200,
+      "y": 420,
+      "label": "trava",
+      "status": "decidido",
+      "fonte": "[[fdd-0007-interface-simulacao]] [[fdd-0004-banco-e-migracoes]] [[adr-0002-acesso-banco-e-migracoes]]"
+    }
+  },
+  "edges": {
+    "e_lead_chat": {
+      "pts": [
+        [
+          151,
+          300
+        ],
+        [
+          320,
+          300
+        ]
+      ]
+    },
+    "e_chat_agente": {
+      "pts": [
+        [
+          440,
+          300
+        ],
+        [
+          580,
+          300
+        ]
+      ]
+    },
+    "e_chat_respondedor": {
+      "pts": [
+        [
+          440,
+          284
+        ],
+        [
+          500,
+          284
+        ],
+        [
+          500,
+          170
+        ],
+        [
+          580,
+          170
+        ]
+      ],
+      "future": true
+    },
+    "e_chat_conversas": {
+      "pts": [
+        [
+          380,
+          152
+        ],
+        [
+          380,
+          268
+        ]
+      ]
+    },
+    "e_chat_registro": {
+      "pts": [
+        [
+          380,
+          332
+        ],
+        [
+          380,
+          469
+        ]
+      ]
+    },
+    "e_registro_painel": {
+      "pts": [
+        [
+          440,
+          520
+        ],
+        [
+          580,
+          520
+        ]
+      ]
+    },
+    "e_registro_encaminhados": {
+      "pts": [
+        [
+          380,
+          571
+        ],
+        [
+          380,
+          640
+        ],
+        [
+          900,
+          640
+        ],
+        [
+          900,
+          552
+        ]
+      ]
+    },
+    "e_chat_trava": {
+      "pts": [
+        [
+          330,
+          332
+        ],
+        [
+          330,
+          420
+        ],
+        [
+          260,
+          420
+        ]
+      ]
+    },
+    "e_trava_registro": {
+      "pts": [
+        [
+          200,
+          452
+        ],
+        [
+          200,
+          520
+        ],
+        [
+          325,
+          520
+        ]
+      ]
+    },
+    "e_agente_painel": {
+      "pts": [
+        [
+          660,
+          332
+        ],
+        [
+          660,
+          488
+        ]
+      ]
+    }
+  },
+  "scenes": [
+    {
+      "title": [
+        "AutoSeguro, ",
+        "interface"
+      ],
+      "sub": [
+        "simulação do lead ",
+        "e acompanhamento"
+      ],
+      "cap": "visão geral da interface",
+      "nodes": "*",
+      "packets": []
+    },
+    {
+      "title": [
+        "1. ",
+        "conversa"
+      ],
+      "sub": [
+        "turno com trava ",
+        "no banco"
+      ],
+      "cap": "uma mensagem por vez",
+      "nodes": [
+        "lead",
+        "chat",
+        "agente"
+      ],
+      "packets": [
+        "e_lead_chat",
+        "e_chat_agente"
+      ]
+    },
+    {
+      "title": [
+        "2. ",
+        "lista"
+      ],
+      "sub": [
+        "conversas ",
+        "mais recentes primeiro"
+      ],
+      "cap": "abre qualquer conversa",
+      "nodes": [
+        "conversas",
+        "chat"
+      ],
+      "packets": [
+        "e_chat_conversas"
+      ]
+    },
+    {
+      "title": [
+        "3. ",
+        "registro"
+      ],
+      "sub": [
+        "mensagens ",
+        "e painel de estado"
+      ],
+      "cap": "texto mascarado no chat",
+      "nodes": [
+        "chat",
+        "registro",
+        "painel"
+      ],
+      "packets": [
+        "e_chat_registro",
+        "e_registro_painel"
+      ]
+    },
+    {
+      "title": [
+        "4. ",
+        "trava"
+      ],
+      "sub": [
+        "turno só roda ",
+        "com a trava da conversa"
+      ],
+      "cap": "trava liberada mesmo em erro",
+      "nodes": [
+        "chat",
+        "trava",
+        "registro"
+      ],
+      "packets": [
+        "e_chat_trava",
+        "e_trava_registro"
+      ]
+    },
+    {
+      "title": [
+        "5. ",
+        "leitura"
+      ],
+      "sub": [
+        "painel lê o estado ",
+        "sem CPF"
+      ],
+      "cap": "estado vem do checkpoint",
+      "nodes": [
+        "agente",
+        "painel"
+      ],
+      "packets": [
+        "e_agente_painel"
+      ]
+    },
+    {
+      "title": [
+        "6. ",
+        "encaminhados"
+      ],
+      "sub": [
+        "aba somente leitura ",
+        "com CPF sem máscara"
+      ],
+      "cap": "nenhuma ação na aba",
+      "nodes": [
+        "registro",
+        "encaminhados"
+      ],
+      "packets": [
+        "e_registro_encaminhados"
+      ]
+    },
+    {
+      "title": [
+        "7. ",
+        "respondedor"
+      ],
+      "sub": [
+        "teste enquanto ",
+        "o agente não existe"
+      ],
+      "cap": "substituído pelo agente",
+      "nodes": [
+        "chat",
+        "respondedor"
+      ],
+      "packets": [
+        "e_chat_respondedor"
+      ]
+    },
+    {
+      "title": [
+        "visão final, ",
+        "interface"
+      ],
+      "sub": [
+        "todos os componentes ",
+        "da simulação"
+      ],
+      "cap": "subsistema interface · geral",
+      "nodes": "*",
+      "packets": []
+    }
+  ]
+}

@@ -1,0 +1,342 @@
+{
+  "meta": {
+    "titulo": "AutoSeguro — catálogo e embeddings",
+    "selo": "subsistema catálogo · 2026-11-09",
+    "atualizado": "2026-11-09",
+    "documentos_lidos": [
+      "[[fdd-0008-carga-do-catalogo]]",
+      "[[rfc-0004-geracao-de-embeddings]]",
+      "[[adr-0003-modelo-de-embeddings]]",
+      "[[adr-0014-recalculo-na-troca-de-modelo]]"
+    ]
+  },
+  "nodes": {
+    "plans": {
+      "type": "bucket",
+      "x": 160,
+      "y": 300,
+      "label": "plans.json",
+      "sub": "regras oficiais",
+      "status": "decidido",
+      "fonte": "[[fdd-0008-carga-do-catalogo]] [[rfc-0003-banco-postgres-pgvector]] [[adr-0014-recalculo-na-troca-de-modelo]]"
+    },
+    "fonte": {
+      "type": "app",
+      "x": 380,
+      "y": 300,
+      "label": "validação",
+      "status": "decidido",
+      "fonte": "[[fdd-0008-carga-do-catalogo]] [[adr-0010-valores-monetarios-decimal]]"
+    },
+    "carga": {
+      "type": "app",
+      "x": 600,
+      "y": 300,
+      "label": "carga",
+      "status": "decidido",
+      "fonte": "[[fdd-0008-carga-do-catalogo]] [[adr-0014-recalculo-na-troca-de-modelo]]"
+    },
+    "planos": {
+      "type": "db",
+      "x": 240,
+      "y": 580,
+      "label": "planos",
+      "status": "decidido",
+      "fonte": "[[fdd-0008-carga-do-catalogo]] [[fdd-0004-banco-e-migracoes]] [[adr-0010-valores-monetarios-decimal]]"
+    },
+    "regras": {
+      "type": "db",
+      "x": 460,
+      "y": 580,
+      "label": "regras",
+      "status": "decidido",
+      "fonte": "[[fdd-0008-carga-do-catalogo]] [[fdd-0004-banco-e-migracoes]] [[adr-0009-identificadores-uuid]]"
+    },
+    "textos": {
+      "type": "app",
+      "x": 600,
+      "y": 420,
+      "label": "frases",
+      "status": "decidido",
+      "fonte": "[[fdd-0008-carga-do-catalogo]] [[rfc-0004-geracao-de-embeddings]] [[adr-0003-modelo-de-embeddings]]"
+    },
+    "embedder": {
+      "type": "app",
+      "x": 820,
+      "y": 420,
+      "label": "embedder",
+      "status": "decidido",
+      "fonte": "[[rfc-0004-geracao-de-embeddings]] [[adr-0003-modelo-de-embeddings]]"
+    },
+    "modelo": {
+      "type": "bucket",
+      "x": 1040,
+      "y": 420,
+      "label": "modelo",
+      "sub": "cache em database/",
+      "status": "decidido",
+      "fonte": "[[rfc-0012-ambiente-de-execucao]] [[adr-0003-modelo-de-embeddings]]"
+    },
+    "trechos": {
+      "type": "db",
+      "x": 700,
+      "y": 580,
+      "label": "trechos",
+      "status": "decidido",
+      "fonte": "[[fdd-0008-carga-do-catalogo]] [[adr-0004-indice-vetorial-e-metrica]]"
+    }
+  },
+  "edges": {
+    "e_plans_fonte": {
+      "pts": [
+        [
+          220,
+          300
+        ],
+        [
+          320,
+          300
+        ]
+      ]
+    },
+    "e_fonte_carga": {
+      "pts": [
+        [
+          440,
+          300
+        ],
+        [
+          540,
+          300
+        ]
+      ]
+    },
+    "e_fonte_planos": {
+      "pts": [
+        [
+          380,
+          332
+        ],
+        [
+          380,
+          380
+        ],
+        [
+          240,
+          380
+        ],
+        [
+          240,
+          528
+        ]
+      ]
+    },
+    "e_carga_regras": {
+      "pts": [
+        [
+          570,
+          332
+        ],
+        [
+          570,
+          360
+        ],
+        [
+          460,
+          360
+        ],
+        [
+          460,
+          528
+        ]
+      ]
+    },
+    "e_carga_textos": {
+      "pts": [
+        [
+          600,
+          332
+        ],
+        [
+          600,
+          388
+        ]
+      ]
+    },
+    "e_textos_embedder": {
+      "pts": [
+        [
+          660,
+          420
+        ],
+        [
+          760,
+          420
+        ]
+      ]
+    },
+    "e_embedder_modelo": {
+      "pts": [
+        [
+          880,
+          420
+        ],
+        [
+          980,
+          420
+        ]
+      ]
+    },
+    "e_embedder_trechos": {
+      "pts": [
+        [
+          820,
+          452
+        ],
+        [
+          820,
+          490
+        ],
+        [
+          700,
+          490
+        ],
+        [
+          700,
+          528
+        ]
+      ]
+    }
+  },
+  "scenes": [
+    {
+      "title": [
+        "AutoSeguro, ",
+        "catálogo e embeddings"
+      ],
+      "sub": [
+        "regras do plans.json ",
+        "viram trechos vetorizados"
+      ],
+      "cap": "visão geral do catálogo",
+      "nodes": "*",
+      "packets": []
+    },
+    {
+      "title": [
+        "1. ",
+        "leitura"
+      ],
+      "sub": [
+        "plans.json lido ",
+        "e validado antes"
+      ],
+      "cap": "arquivo inválido não grava nada",
+      "nodes": [
+        "plans",
+        "fonte",
+        "carga"
+      ],
+      "packets": [
+        "e_plans_fonte",
+        "e_fonte_carga"
+      ]
+    },
+    {
+      "title": [
+        "2. ",
+        "regras"
+      ],
+      "sub": [
+        "planos e regras ",
+        "com chave estável"
+      ],
+      "cap": "UUID v5, sem ids novos",
+      "nodes": [
+        "fonte",
+        "carga",
+        "planos",
+        "regras"
+      ],
+      "packets": [
+        "e_fonte_planos",
+        "e_carga_regras"
+      ]
+    },
+    {
+      "title": [
+        "3. ",
+        "frases"
+      ],
+      "sub": [
+        "uma frase por regra, ",
+        "modelo fixo por tipo"
+      ],
+      "cap": "frase nunca é escrita à mão",
+      "nodes": [
+        "carga",
+        "textos"
+      ],
+      "packets": [
+        "e_carga_textos"
+      ]
+    },
+    {
+      "title": [
+        "4. ",
+        "vetores"
+      ],
+      "sub": [
+        "e5 com prefixo passage ",
+        "384 dimensões"
+      ],
+      "cap": "só o que mudou é recalculado",
+      "nodes": [
+        "textos",
+        "embedder",
+        "modelo",
+        "trechos"
+      ],
+      "packets": [
+        "e_textos_embedder",
+        "e_embedder_modelo",
+        "e_embedder_trechos"
+      ]
+    },
+    {
+      "title": [
+        "5. ",
+        "gravação"
+      ],
+      "sub": [
+        "tudo numa transação, ",
+        "regra inativa sai da busca"
+      ],
+      "cap": "falha reverte toda a carga",
+      "nodes": [
+        "carga",
+        "planos",
+        "regras",
+        "trechos"
+      ],
+      "packets": [
+        "e_fonte_planos",
+        "e_carga_regras",
+        "e_embedder_trechos"
+      ]
+    },
+    {
+      "title": [
+        "visão final, ",
+        "catálogo"
+      ],
+      "sub": [
+        "carga idempotente ",
+        "e identificadores estáveis"
+      ],
+      "cap": "subsistema catálogo · geral",
+      "nodes": "*",
+      "packets": []
+    }
+  ]
+}

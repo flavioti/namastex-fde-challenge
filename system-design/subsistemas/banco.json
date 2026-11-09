@@ -1,0 +1,346 @@
+{
+  "meta": {
+    "titulo": "AutoSeguro — banco",
+    "selo": "subsistema banco · 2026-11-09",
+    "atualizado": "2026-11-09",
+    "documentos_lidos": [
+      "[[fdd-0004-banco-e-migracoes]]"
+    ]
+  },
+  "nodes": {
+    "conversas": {
+      "type": "db",
+      "x": 360,
+      "y": 200,
+      "label": "conversas",
+      "status": "decidido",
+      "fonte": "[[fdd-0004-banco-e-migracoes]] [[adr-0009-identificadores-uuid]]"
+    },
+    "mensagens": {
+      "type": "db",
+      "x": 560,
+      "y": 200,
+      "label": "mensagens",
+      "status": "decidido",
+      "fonte": "[[fdd-0004-banco-e-migracoes]] [[adr-0018-mensagens-em-tabela-propria]]"
+    },
+    "cotacoes": {
+      "type": "db",
+      "x": 760,
+      "y": 200,
+      "label": "cotações",
+      "status": "decidido",
+      "fonte": "[[fdd-0004-banco-e-migracoes]] [[adr-0010-valores-monetarios-decimal]]"
+    },
+    "avaliacoes": {
+      "type": "db",
+      "x": 960,
+      "y": 200,
+      "label": "avaliações",
+      "status": "decidido",
+      "fonte": "[[fdd-0004-banco-e-migracoes]] [[adr-0009-identificadores-uuid]]"
+    },
+    "pool": {
+      "type": "app",
+      "x": 420,
+      "y": 420,
+      "label": "pool",
+      "status": "decidido",
+      "fonte": "[[fdd-0004-banco-e-migracoes]] [[adr-0002-acesso-banco-e-migracoes]]"
+    },
+    "migracoes": {
+      "type": "app",
+      "x": 640,
+      "y": 420,
+      "label": "migrações",
+      "status": "decidido",
+      "fonte": "[[fdd-0004-banco-e-migracoes]] [[adr-0002-acesso-banco-e-migracoes]]"
+    },
+    "busca": {
+      "type": "app",
+      "x": 860,
+      "y": 420,
+      "label": "busca",
+      "status": "decidido",
+      "fonte": "[[fdd-0004-banco-e-migracoes]] [[adr-0005-busca-hibrida-rrf]]"
+    },
+    "planos": {
+      "type": "db",
+      "x": 240,
+      "y": 640,
+      "label": "planos",
+      "status": "decidido",
+      "fonte": "[[fdd-0004-banco-e-migracoes]] [[adr-0010-valores-monetarios-decimal]]"
+    },
+    "regras": {
+      "type": "db",
+      "x": 420,
+      "y": 640,
+      "label": "regras",
+      "status": "decidido",
+      "fonte": "[[fdd-0004-banco-e-migracoes]] [[adr-0002-acesso-banco-e-migracoes]]"
+    },
+    "trechos": {
+      "type": "db",
+      "x": 640,
+      "y": 640,
+      "label": "trechos",
+      "status": "decidido",
+      "fonte": "[[fdd-0004-banco-e-migracoes]] [[adr-0004-indice-vetorial-e-metrica]] [[adr-0005-busca-hibrida-rrf]]"
+    },
+    "checkpoint": {
+      "type": "db",
+      "x": 1000,
+      "y": 640,
+      "label": "checkpoint",
+      "status": "decidido",
+      "fonte": "[[fdd-0004-banco-e-migracoes]] [[adr-0006-estado-do-grafo-pydantic]]"
+    }
+  },
+  "edges": {
+    "e_pool_registro": {
+      "pts": [
+        [
+          420,
+          388
+        ],
+        [
+          420,
+          320
+        ],
+        [
+          560,
+          320
+        ],
+        [
+          560,
+          251
+        ]
+      ]
+    },
+    "e_migracoes_registro": {
+      "pts": [
+        [
+          640,
+          388
+        ],
+        [
+          640,
+          300
+        ],
+        [
+          760,
+          300
+        ],
+        [
+          760,
+          251
+        ]
+      ]
+    },
+    "e_pool_regras": {
+      "pts": [
+        [
+          420,
+          452
+        ],
+        [
+          420,
+          589
+        ]
+      ]
+    },
+    "e_planos_regras": {
+      "pts": [
+        [
+          295,
+          640
+        ],
+        [
+          365,
+          640
+        ]
+      ]
+    },
+    "e_regras_trechos": {
+      "pts": [
+        [
+          475,
+          640
+        ],
+        [
+          585,
+          640
+        ]
+      ]
+    },
+    "e_busca_trechos": {
+      "pts": [
+        [
+          860,
+          452
+        ],
+        [
+          860,
+          540
+        ],
+        [
+          640,
+          540
+        ],
+        [
+          640,
+          589
+        ]
+      ]
+    },
+    "e_pool_checkpoint": {
+      "pts": [
+        [
+          450,
+          452
+        ],
+        [
+          450,
+          560
+        ],
+        [
+          1000,
+          560
+        ],
+        [
+          1000,
+          589
+        ]
+      ]
+    }
+  },
+  "scenes": [
+    {
+      "title": [
+        "AutoSeguro, ",
+        "banco"
+      ],
+      "sub": [
+        "registro, regras ",
+        "e estado do agente"
+      ],
+      "cap": "visão geral do banco",
+      "nodes": "*",
+      "packets": []
+    },
+    {
+      "title": [
+        "1. ",
+        "registro"
+      ],
+      "sub": [
+        "conversas, mensagens, ",
+        "cotações e avaliações"
+      ],
+      "cap": "mensagens já mascaradas",
+      "nodes": [
+        "pool",
+        "conversas",
+        "mensagens",
+        "cotacoes",
+        "avaliacoes"
+      ],
+      "packets": [
+        "e_pool_registro"
+      ]
+    },
+    {
+      "title": [
+        "2. ",
+        "migrações"
+      ],
+      "sub": [
+        "SQL numerado, ",
+        "aplicado em ordem"
+      ],
+      "cap": "reexecutar não altera nada",
+      "nodes": [
+        "migracoes",
+        "cotacoes",
+        "planos",
+        "regras"
+      ],
+      "packets": [
+        "e_migracoes_registro",
+        "e_planos_regras"
+      ]
+    },
+    {
+      "title": [
+        "3. ",
+        "catálogo"
+      ],
+      "sub": [
+        "planos, regras ",
+        "e trechos com vetor"
+      ],
+      "cap": "regra desativada sai da busca",
+      "nodes": [
+        "planos",
+        "regras",
+        "trechos",
+        "pool"
+      ],
+      "packets": [
+        "e_pool_regras",
+        "e_regras_trechos",
+        "e_planos_regras"
+      ]
+    },
+    {
+      "title": [
+        "4. ",
+        "busca híbrida"
+      ],
+      "sub": [
+        "texto e vetor ",
+        "fundidos por RRF"
+      ],
+      "cap": "constante 60, ajustável",
+      "nodes": [
+        "busca",
+        "trechos"
+      ],
+      "packets": [
+        "e_busca_trechos"
+      ]
+    },
+    {
+      "title": [
+        "5. ",
+        "estado do agente"
+      ],
+      "sub": [
+        "checkpoint no esquema ",
+        "próprio"
+      ],
+      "cap": "separado do registro",
+      "nodes": [
+        "pool",
+        "checkpoint"
+      ],
+      "packets": [
+        "e_pool_checkpoint"
+      ]
+    },
+    {
+      "title": [
+        "visão final, ",
+        "banco"
+      ],
+      "sub": [
+        "todas as tabelas ",
+        "e índices"
+      ],
+      "cap": "subsistema banco · geral",
+      "nodes": "*",
+      "packets": []
+    }
+  ]
+}

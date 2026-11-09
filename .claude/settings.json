@@ -1,0 +1,37 @@
+{
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write|Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 \"$CLAUDE_PROJECT_DIR/.claude/skills/system-design/scripts/aprovacoes.py\" --hook PostToolUse 2>/dev/null || true",
+            "timeout": 30
+          },
+          {
+            "type": "command",
+            "command": "python3 \"$CLAUDE_PROJECT_DIR/.claude/skills/system-design/scripts/sincronizar.py\" --hook PostToolUse 2>/dev/null || true",
+            "timeout": 120
+          }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 \"$CLAUDE_PROJECT_DIR/.claude/skills/system-design/scripts/aprovacoes.py\" --hook UserPromptSubmit 2>/dev/null || true",
+            "timeout": 30
+          },
+          {
+            "type": "command",
+            "command": "python3 \"$CLAUDE_PROJECT_DIR/.claude/skills/system-design/scripts/sincronizar.py\" --hook UserPromptSubmit 2>/dev/null || true",
+            "timeout": 120
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,268 @@
+{
+  "meta": {
+    "titulo": "AutoSeguro — cotação",
+    "selo": "subsistema cotação · 2026-11-09",
+    "atualizado": "2026-11-09",
+    "documentos_lidos": [
+      "[[fdd-0002-cliente-da-cotacao]]",
+      "[[rfc-0006-servico-de-cotacao]]",
+      "[[adr-0008-cliente-http-cotacao]]",
+      "[[adr-0015-ferramenta-cotacao-schema-pydantic]]"
+    ]
+  },
+  "nodes": {
+    "agente": {
+      "type": "app",
+      "x": 140,
+      "y": 300,
+      "label": "agente",
+      "status": "decidido",
+      "fonte": "[[rfc-0007-agente-langgraph-langchain]] [[fdd-0005-agente]] [[adr-0007-cliente-modelo-chatanthropic]]"
+    },
+    "ferramenta": {
+      "type": "app",
+      "x": 380,
+      "y": 300,
+      "label": "ferramenta",
+      "status": "decidido",
+      "fonte": "[[adr-0015-ferramenta-cotacao-schema-pydantic]] [[fdd-0005-agente]]"
+    },
+    "cliente": {
+      "type": "app",
+      "x": 620,
+      "y": 300,
+      "label": "cliente",
+      "status": "decidido",
+      "fonte": "[[fdd-0002-cliente-da-cotacao]] [[adr-0008-cliente-http-cotacao]]"
+    },
+    "servico": {
+      "type": "ext",
+      "x": 880,
+      "y": 300,
+      "label": "cotação",
+      "sub": "POST /quote",
+      "status": "decidido",
+      "fonte": "[[rfc-0006-servico-de-cotacao]] [[adr-0008-cliente-http-cotacao]]"
+    },
+    "retry": {
+      "type": "app",
+      "x": 620,
+      "y": 480,
+      "label": "tentativas",
+      "status": "decidido",
+      "fonte": "[[fdd-0002-cliente-da-cotacao]] [[rfc-0006-servico-de-cotacao]] [[adr-0008-cliente-http-cotacao]]"
+    },
+    "resultado": {
+      "type": "app",
+      "x": 380,
+      "y": 480,
+      "label": "resultado",
+      "status": "decidido",
+      "fonte": "[[fdd-0002-cliente-da-cotacao]] [[adr-0010-valores-monetarios-decimal]]"
+    },
+    "juiz": {
+      "type": "app",
+      "x": 140,
+      "y": 480,
+      "label": "juiz",
+      "status": "decidido",
+      "fonte": "[[rfc-0009-juiz-e-regras-de-validacao]] [[fdd-0009-juiz]] [[adr-0010-valores-monetarios-decimal]]"
+    }
+  },
+  "edges": {
+    "e_agente_ferramenta": {
+      "pts": [
+        [
+          200,
+          300
+        ],
+        [
+          320,
+          300
+        ]
+      ]
+    },
+    "e_ferramenta_cliente": {
+      "pts": [
+        [
+          440,
+          300
+        ],
+        [
+          560,
+          300
+        ]
+      ]
+    },
+    "e_cliente_servico": {
+      "pts": [
+        [
+          680,
+          300
+        ],
+        [
+          832,
+          300
+        ]
+      ]
+    },
+    "e_cliente_retry": {
+      "pts": [
+        [
+          620,
+          332
+        ],
+        [
+          620,
+          448
+        ]
+      ]
+    },
+    "e_retry_servico": {
+      "pts": [
+        [
+          680,
+          480
+        ],
+        [
+          880,
+          480
+        ],
+        [
+          880,
+          332
+        ]
+      ]
+    },
+    "e_retry_resultado": {
+      "pts": [
+        [
+          560,
+          480
+        ],
+        [
+          440,
+          480
+        ]
+      ]
+    },
+    "e_resultado_juiz": {
+      "pts": [
+        [
+          320,
+          480
+        ],
+        [
+          200,
+          480
+        ]
+      ]
+    }
+  },
+  "scenes": [
+    {
+      "title": [
+        "AutoSeguro, ",
+        "cotação"
+      ],
+      "sub": [
+        "cliente único do serviço ",
+        "de cotação"
+      ],
+      "cap": "visão geral da cotação",
+      "nodes": "*",
+      "packets": []
+    },
+    {
+      "title": [
+        "1. ",
+        "chamada"
+      ],
+      "sub": [
+        "agente pede a cotação ",
+        "pela ferramenta"
+      ],
+      "cap": "sem preço vindo do modelo",
+      "nodes": [
+        "agente",
+        "ferramenta",
+        "cliente"
+      ],
+      "packets": [
+        "e_agente_ferramenta",
+        "e_ferramenta_cliente"
+      ]
+    },
+    {
+      "title": [
+        "2. ",
+        "serviço"
+      ],
+      "sub": [
+        "um plano por chamada, ",
+        "três no total"
+      ],
+      "cap": "timeout de 5 s por tentativa",
+      "nodes": [
+        "cliente",
+        "servico"
+      ],
+      "packets": [
+        "e_cliente_servico"
+      ]
+    },
+    {
+      "title": [
+        "3. ",
+        "falhas"
+      ],
+      "sub": [
+        "5xx, timeout e conexão ",
+        "voltam com esperas"
+      ],
+      "cap": "esperas de 0,5 s e 1 s, prazo de 15 s",
+      "nodes": [
+        "cliente",
+        "retry",
+        "servico"
+      ],
+      "packets": [
+        "e_cliente_retry",
+        "e_retry_servico"
+      ]
+    },
+    {
+      "title": [
+        "4. ",
+        "resultado"
+      ],
+      "sub": [
+        "422 se separa pelo corpo, ",
+        "erro de payload não é retentado"
+      ],
+      "cap": "indisponível nunca traz preço",
+      "nodes": [
+        "retry",
+        "resultado",
+        "juiz"
+      ],
+      "packets": [
+        "e_retry_resultado",
+        "e_resultado_juiz"
+      ]
+    },
+    {
+      "title": [
+        "visão final, ",
+        "cotação"
+      ],
+      "sub": [
+        "valores só da API ",
+        "ou nenhum"
+      ],
+      "cap": "subsistema cotação · geral",
+      "nodes": "*",
+      "packets": []
+    }
+  ]
+}

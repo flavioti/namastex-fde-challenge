@@ -1,0 +1,407 @@
+{
+  "meta": {
+    "titulo": "AutoSeguro — agente",
+    "selo": "subsistema agente · 2026-11-09",
+    "atualizado": "2026-11-09",
+    "documentos_lidos": [
+      "[[fdd-0005-agente]]",
+      "[[rfc-0007-agente-langgraph-langchain]]"
+    ]
+  },
+  "nodes": {
+    "entrada": {
+      "type": "app",
+      "x": 200,
+      "y": 300,
+      "label": "entrada",
+      "status": "decidido",
+      "fonte": "[[fdd-0005-agente]] [[adr-0020-padroes-deteccao-pii]]"
+    },
+    "coleta": {
+      "type": "app",
+      "x": 420,
+      "y": 300,
+      "label": "coleta",
+      "status": "decidido",
+      "fonte": "[[fdd-0005-agente]] [[fdd-0001-fluxo-de-conversa-e-coleta]] [[adr-0006-estado-do-grafo-pydantic]]"
+    },
+    "llm_agente": {
+      "type": "ext",
+      "x": 420,
+      "y": 120,
+      "label": "LLM",
+      "sub": "agente",
+      "status": "decidido",
+      "fonte": "[[adr-0007-cliente-modelo-chatanthropic]]"
+    },
+    "ferramenta": {
+      "type": "app",
+      "x": 640,
+      "y": 300,
+      "label": "ferramenta",
+      "status": "decidido",
+      "fonte": "[[adr-0015-ferramenta-cotacao-schema-pydantic]] [[rfc-0005-modelo-llm-e-apis-externas]]"
+    },
+    "cotacao": {
+      "type": "app",
+      "x": 860,
+      "y": 300,
+      "label": "cotação",
+      "status": "decidido",
+      "fonte": "[[adr-0008-cliente-http-cotacao]] [[rfc-0006-servico-de-cotacao]]"
+    },
+    "juiz": {
+      "type": "app",
+      "x": 640,
+      "y": 520,
+      "label": "juiz",
+      "status": "decidido",
+      "fonte": "[[adr-0010-valores-monetarios-decimal]] [[rfc-0009-juiz-e-regras-de-validacao]]"
+    },
+    "llm_juiz": {
+      "type": "ext",
+      "x": 860,
+      "y": 520,
+      "label": "LLM",
+      "sub": "juiz",
+      "status": "decidido",
+      "fonte": "[[adr-0007-cliente-modelo-chatanthropic]]"
+    },
+    "resposta": {
+      "type": "app",
+      "x": 420,
+      "y": 520,
+      "label": "resposta",
+      "status": "decidido",
+      "fonte": "[[adr-0020-padroes-deteccao-pii]] [[fdd-0005-agente]]"
+    },
+    "encaminhamento": {
+      "type": "app",
+      "x": 1100,
+      "y": 520,
+      "label": "humano",
+      "status": "decidido",
+      "fonte": "[[adr-0013-teto-tokens-e-encaminhamento]] [[fdd-0001-fluxo-de-conversa-e-coleta]]"
+    },
+    "checkpoint": {
+      "type": "db",
+      "x": 420,
+      "y": 700,
+      "label": "checkpoint",
+      "status": "decidido",
+      "fonte": "[[adr-0006-estado-do-grafo-pydantic]] [[fdd-0004-banco-e-migracoes]]"
+    },
+    "mascara": {
+      "type": "app",
+      "x": 200,
+      "y": 520,
+      "label": "máscara",
+      "status": "decidido",
+      "fonte": "[[fdd-0003-mascaramento-de-dados-pessoais]] [[adr-0020-padroes-deteccao-pii]]"
+    },
+    "mensagens": {
+      "type": "db",
+      "x": 200,
+      "y": 700,
+      "label": "mensagens",
+      "status": "decidido",
+      "fonte": "[[adr-0018-mensagens-em-tabela-propria]] [[fdd-0004-banco-e-migracoes]]"
+    }
+  },
+  "edges": {
+    "e_entrada_coleta": {
+      "pts": [
+        [
+          260,
+          300
+        ],
+        [
+          360,
+          300
+        ]
+      ]
+    },
+    "e_coleta_llm": {
+      "pts": [
+        [
+          420,
+          268
+        ],
+        [
+          420,
+          152
+        ]
+      ]
+    },
+    "e_coleta_ferramenta": {
+      "pts": [
+        [
+          480,
+          300
+        ],
+        [
+          580,
+          300
+        ]
+      ]
+    },
+    "e_ferramenta_cotacao": {
+      "pts": [
+        [
+          700,
+          300
+        ],
+        [
+          800,
+          300
+        ]
+      ]
+    },
+    "e_coleta_juiz": {
+      "pts": [
+        [
+          440,
+          332
+        ],
+        [
+          440,
+          470
+        ],
+        [
+          620,
+          470
+        ],
+        [
+          620,
+          488
+        ]
+      ]
+    },
+    "e_juiz_llm_juiz": {
+      "pts": [
+        [
+          700,
+          520
+        ],
+        [
+          812,
+          520
+        ]
+      ]
+    },
+    "e_juiz_resposta": {
+      "pts": [
+        [
+          580,
+          520
+        ],
+        [
+          480,
+          520
+        ]
+      ]
+    },
+    "e_juiz_encaminhamento": {
+      "pts": [
+        [
+          640,
+          488
+        ],
+        [
+          640,
+          450
+        ],
+        [
+          1040,
+          450
+        ],
+        [
+          1040,
+          520
+        ]
+      ]
+    },
+    "e_resposta_checkpoint": {
+      "pts": [
+        [
+          420,
+          552
+        ],
+        [
+          420,
+          652
+        ]
+      ]
+    },
+    "e_resposta_mascara": {
+      "pts": [
+        [
+          360,
+          520
+        ],
+        [
+          260,
+          520
+        ]
+      ]
+    },
+    "e_mascara_mensagens": {
+      "pts": [
+        [
+          200,
+          552
+        ],
+        [
+          200,
+          648
+        ]
+      ]
+    }
+  },
+  "scenes": [
+    {
+      "title": [
+        "AutoSeguro, ",
+        "agente"
+      ],
+      "sub": [
+        "etapas da conversa ",
+        "e decisão"
+      ],
+      "cap": "visão geral do agente",
+      "nodes": "*",
+      "packets": []
+    },
+    {
+      "title": [
+        "1. ",
+        "coleta"
+      ],
+      "sub": [
+        "dados ",
+        "validados por código"
+      ],
+      "cap": "modelo só redige o roteiro",
+      "nodes": [
+        "entrada",
+        "coleta",
+        "llm_agente"
+      ],
+      "packets": [
+        "e_entrada_coleta",
+        "e_coleta_llm"
+      ]
+    },
+    {
+      "title": [
+        "2. ",
+        "cotação"
+      ],
+      "sub": [
+        "ferramenta ",
+        "chamada pelo modelo"
+      ],
+      "cap": "argumentos vêm do estado",
+      "nodes": [
+        "coleta",
+        "ferramenta",
+        "cotacao"
+      ],
+      "packets": [
+        "e_coleta_ferramenta",
+        "e_ferramenta_cotacao"
+      ]
+    },
+    {
+      "title": [
+        "3. ",
+        "verificação"
+      ],
+      "sub": [
+        "juiz ",
+        "antes de cada resposta"
+      ],
+      "cap": "reprovada, reescreve uma vez",
+      "nodes": [
+        "coleta",
+        "juiz",
+        "llm_juiz",
+        "resposta"
+      ],
+      "packets": [
+        "e_coleta_juiz",
+        "e_juiz_llm_juiz",
+        "e_juiz_resposta"
+      ]
+    },
+    {
+      "title": [
+        "4. ",
+        "estado"
+      ],
+      "sub": [
+        "checkpoint ",
+        "a cada etapa"
+      ],
+      "cap": "guarda os valores originais",
+      "nodes": [
+        "resposta",
+        "checkpoint"
+      ],
+      "packets": [
+        "e_resposta_checkpoint"
+      ]
+    },
+    {
+      "title": [
+        "5. ",
+        "encaminhamento"
+      ],
+      "sub": [
+        "juiz reprova duas vezes ",
+        "ou o limite é atingido"
+      ],
+      "cap": "nenhuma resposta depois",
+      "nodes": [
+        "juiz",
+        "encaminhamento"
+      ],
+      "packets": [
+        "e_juiz_encaminhamento"
+      ]
+    },
+    {
+      "title": [
+        "6. ",
+        "saída"
+      ],
+      "sub": [
+        "resposta passa pela máscara ",
+        "antes de gravar"
+      ],
+      "cap": "texto sai sem dado pessoal",
+      "nodes": [
+        "resposta",
+        "mascara",
+        "mensagens"
+      ],
+      "packets": [
+        "e_resposta_mascara",
+        "e_mascara_mensagens"
+      ]
+    },
+    {
+      "title": [
+        "visão final, ",
+        "agente"
+      ],
+      "sub": [
+        "todas as etapas ",
+        "do agente"
+      ],
+      "cap": "subsistema agente · geral",
+      "nodes": "*",
+      "packets": []
+    }
+  ]
+}
