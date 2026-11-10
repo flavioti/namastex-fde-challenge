@@ -108,7 +108,9 @@ A conversa é encaminhada para um humano nos seguintes casos:
 | Dado inválido após tentativas | Dado inválido após tentativas |
 | Teto de tokens atingido | Limite da conversa atingido |
 
-Ao encaminhar, o agente avisa o lead em uma mensagem do roteiro, e não responde mais. Esse comportamento segue a [[rfc-0001-simulador-de-conversa]].
+Ao encaminhar, o agente avisa o lead em uma mensagem do roteiro, e não responde mais.
+
+**Motivos adicionais (decisão da revisão).** Além da tabela acima, são registrados os motivos Falha do modelo (três tentativas da API falharam), Falha do juiz (três tentativas do juiz falharam) e Resposta reprovada pelo juiz (a resposta e a reescrita foram reprovadas). Esse comportamento segue a [[rfc-0001-simulador-de-conversa]].
 
 ## 8. Status da conversa
 

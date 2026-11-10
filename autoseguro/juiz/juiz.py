@@ -56,10 +56,10 @@ class Juiz:
         ultimo_erro: Exception | None = None
         for numero in range(1, TENTATIVAS + 1):
             try:
-                veredicto = self._modelo.estruturar(prompts.INSTRUCOES, conteudo, VeredictoJuiz)
+                veredicto, tokens = self._modelo.estruturar(prompts.INSTRUCOES, conteudo, VeredictoJuiz)
                 if not isinstance(veredicto, VeredictoJuiz):
                     raise TypeError("saída fora do formato VeredictoJuiz")
-                return self._decidir(veredicto, numero)
+                return self._decidir(veredicto, numero, tokens)
             except (ValidationError, TypeError, ValueError, RuntimeError) as erro:
                 ultimo_erro = erro
                 _log.warning("falha do juiz, tentativa", extra={"evento": "juiz_falha",
@@ -71,11 +71,11 @@ class Juiz:
         return DecisaoJuiz(aprovado=False, regra=None, motivo=MOTIVO_FALHA, tentativas=TENTATIVAS)
 
     @staticmethod
-    def _decidir(veredicto: VeredictoJuiz, tentativas: int) -> DecisaoJuiz:
+    def _decidir(veredicto: VeredictoJuiz, tentativas: int, tokens: int) -> DecisaoJuiz:
         motivo = _sanitizar_motivo(veredicto.motivo)
         if veredicto.aprovado:
-            return DecisaoJuiz(aprovado=True, regra=None, motivo="", tentativas=tentativas)
-        return DecisaoJuiz(aprovado=False, regra=veredicto.regra, motivo=motivo, tentativas=tentativas)
+            return DecisaoJuiz(aprovado=True, regra=None, motivo="", tentativas=tentativas, tokens=tokens)
+        return DecisaoJuiz(aprovado=False, regra=veredicto.regra, motivo=motivo, tentativas=tentativas, tokens=tokens)
 
 
 def _sanitizar_motivo(motivo: str) -> str:

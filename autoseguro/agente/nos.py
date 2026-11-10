@@ -7,6 +7,7 @@ As dependências (modelo, juiz, cotação e pool do registro) entram por fechame
 from __future__ import annotations
 
 import time
+import uuid
 from dataclasses import dataclass
 from typing import Any, Callable, Optional
 
@@ -24,6 +25,7 @@ from autoseguro.banco.repositorios import encaminhamentos as repo_encaminhamento
 from autoseguro.banco.repositorios import mensagens as repo_mensagens
 from autoseguro.cotacao import DadosCotacao
 from autoseguro.juiz import prompts as prompts_juiz
+from autoseguro.observabilidade.feedback import registrar_feedbacks
 from autoseguro.logs import obter_logger
 from autoseguro.mascaramento import detectar, mascarar_entrada, mascarar_saida
 
@@ -55,6 +57,7 @@ class Dependencias:
     cotacao: Any
     pool: ConnectionPool
     sleep: Callable[[float], None] = time.sleep
+    cliente_trace: Any = None  # cliente do LangSmith, quando o tracing está ativo
 
 
 def _passo(dados, cotacao: Optional[dict]) -> Optional[str]:
@@ -247,14 +250,19 @@ def criar_nos(deps: Dependencias) -> dict[str, Callable[[EstadoConversa], dict]]
         planos = cot.get("planos") if cot and cot.get("tipo") == "sucesso" else None
         motivo_cotacao = cot.get("motivo") if cot else None
         decisao = deps.juiz.avaliar(estado.rascunho or "", planos, estado.status, motivo_cotacao)
+        tokens = {"tokens_consumidos": estado.tokens_consumidos + decisao.tokens}
+        if deps.cliente_trace is not None and estado.trace_id:
+            registrar_feedbacks(deps.cliente_trace, uuid.UUID(estado.trace_id), decisao)
         if decisao.aprovado:
-            return {"proxima": "resposta", "motivo_juiz": None}
+            return {"proxima": "resposta", "motivo_juiz": None, **tokens}
         if decisao.motivo == "falha do juiz":
-            return {"proxima": "encaminhamento", "motivo_encaminhamento": MOTIVO_FALHA_JUIZ, "rascunho": None}
+            return {"proxima": "encaminhamento", "motivo_encaminhamento": MOTIVO_FALHA_JUIZ, "rascunho": None,
+                    **tokens}
         if estado.reescritas >= 1:
-            return {"proxima": "encaminhamento", "motivo_encaminhamento": MOTIVO_REPROVADA, "rascunho": None}
+            return {"proxima": "encaminhamento", "motivo_encaminhamento": MOTIVO_REPROVADA, "rascunho": None,
+                    **tokens}
         return {"proxima": "coleta", "reescritas": estado.reescritas + 1, "rascunho": None,
-                "motivo_juiz": decisao.motivo or "resposta fora das regras"}
+                "motivo_juiz": decisao.motivo or "resposta fora das regras", **tokens}
 
     def resposta(estado: EstadoConversa) -> dict:
         texto = mascarar_saida(estado.rascunho or "", estado.conversa_id).texto

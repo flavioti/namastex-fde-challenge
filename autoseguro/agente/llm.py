@@ -34,13 +34,13 @@ def tentar(chamada: Callable[[], T], sleep: Callable[[float], None] = time.sleep
 
 
 class ModeloAnthropic:
-    """Adaptador sobre ChatAnthropic, com temperatura 0 (RFC-0005)."""
+    """Adaptador sobre ChatAnthropic. Sem o parâmetro temperature: os modelos da família Claude 5 o recusam (docs/tasks.md, T-34)."""
 
     def __init__(self, modelo_id: str):
         from langchain_anthropic import ChatAnthropic
 
         self.modelo_id = modelo_id
-        self._llm = ChatAnthropic(model=modelo_id, temperature=0, max_retries=0)
+        self._llm = ChatAnthropic(model=modelo_id, max_retries=0)
 
     def conversar(
         self,
@@ -51,9 +51,13 @@ class ModeloAnthropic:
         llm: Any = self._llm.bind_tools(list(ferramentas)) if ferramentas else self._llm
         return llm.invoke([SystemMessage(content=sistema), *mensagens])
 
-    def estruturar(self, sistema: str, conteudo: str, schema: type[T]) -> T:
-        llm: Any = self._llm.with_structured_output(schema)
-        return llm.invoke([SystemMessage(content=sistema), HumanMessage(content=conteudo)])
+    def estruturar(self, sistema: str, conteudo: str, schema: type[T]) -> tuple[T, int]:
+        """Devolve a saída no formato do schema e os tokens consumidos. Saída fora do formato gera erro."""
+        llm: Any = self._llm.with_structured_output(schema, include_raw=True)
+        resultado = llm.invoke([SystemMessage(content=sistema), HumanMessage(content=conteudo)])
+        if resultado.get("parsed") is None:
+            raise ValueError("saída fora do formato solicitado")
+        return resultado["parsed"], tokens_da_resposta(resultado["raw"], sistema + conteudo, "")
 
 
 def tokens_da_resposta(resposta: AIMessage, texto_entrada: str = "", texto_saida: str = "") -> int:

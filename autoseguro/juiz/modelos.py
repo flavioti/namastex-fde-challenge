@@ -22,3 +22,4 @@ class DecisaoJuiz(BaseModel):
     regra: Optional[Literal["R1", "R2", "R3", "R4"]] = None
     motivo: str = ""
     tentativas: int = 0
+    tokens: int = 0  # consumo do modelo do juiz nesta decisão, somado ao teto do agente (ADR-0013)

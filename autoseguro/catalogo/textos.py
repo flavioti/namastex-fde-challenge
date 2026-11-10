@@ -24,7 +24,7 @@ def texto_da_regra(regra: Regra) -> str:
                 f"{d.get('motivo', '')}".rstrip()
             )
         return (
-            f"Para idade de {d['idade_min']} a {d['idade_max']} anos, "
+            f"Para motorista com idade de {d['idade_min']} a {d['idade_max']} anos, "
             f"o multiplicador do prêmio é {_numero(d['multiplicador'])}."
         )
     if regra.tipo == "idade_veiculo":

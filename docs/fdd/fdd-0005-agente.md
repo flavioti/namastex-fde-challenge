@@ -145,6 +145,10 @@ O grafo é montado uma vez, em `grafo.py`, e compilado com o checkpoint `Postgre
 
 O nó `coleta` é o único que chama o modelo do agente. O nó `juiz` é o único que chama o modelo do juiz.
 
+**Decisões da revisão.** Quando a cotação é recusada ou falha, o nó `cotacao` leva direto ao encaminhamento, sem o modelo redigir a resposta, porque a mensagem é fixa e não cita valores. O pedido de humano e a desistência são detectados por listas fixas de frases.
+
+**Teto de tokens (decisão da implementação).** O consumo do modelo do juiz entra no mesmo teto do agente, por decisão de revisão.
+
 ## 6. Nó entrada
 
 1. Recebe a mensagem original do lead.

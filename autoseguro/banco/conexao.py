@@ -16,6 +16,15 @@ MENSAGEM_BANCO_INDISPONIVEL = (
 )
 
 
+def detalhe_erro(erro: Exception) -> str:
+    """Primeira linha do erro do servidor, com dica para falha de senha. Não inclui a URL nem a senha."""
+    linha = str(erro).splitlines()[0] if str(erro) else type(erro).__name__
+    if "password authentication failed" in linha:
+        linha += (" | A senha de DATABASE_URL não é a do volume do banco. Ela foi fixada na primeira"
+                  " inicialização. Use a mesma senha em POSTGRES_PASSWORD e DATABASE_URL, ou recrie o volume.")
+    return linha
+
+
 def _configurar(conexao: Connection) -> None:
     """Registra o tipo vector nas conexões, quando a extensão já existe."""
     from pgvector.psycopg import register_vector
@@ -42,5 +51,5 @@ def abrir_pool(url: str, minimo: int = 1, maximo: int = 5, timeout: float = 10.0
         pool.open(wait=True, timeout=timeout)
     except Exception as erro:  # psycopg_pool.PoolTimeout e erros de conexão
         pool.close()
-        raise BancoIndisponivel(MENSAGEM_BANCO_INDISPONIVEL) from erro
+        raise BancoIndisponivel(f"{MENSAGEM_BANCO_INDISPONIVEL}\nDetalhe: {detalhe_erro(erro)}") from erro
     return pool

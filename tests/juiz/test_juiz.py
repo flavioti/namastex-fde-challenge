@@ -26,7 +26,7 @@ class ModeloFalso:
         resposta = self.respostas.pop(0) if self.respostas else RuntimeError("sem resposta")
         if isinstance(resposta, Exception):
             raise resposta
-        return resposta
+        return resposta, 120
 
 
 # ----- extração ---------------------------------------------------------------
@@ -82,6 +82,12 @@ def test_rascunho_com_valor_fora_da_cotacao_nao_chama_o_modelo():
     decisao = Juiz(modelo, sleep=lambda s: None).avaliar("Custa R$ 999,00.", PLANOS, "cotada", None)
     assert decisao.regra == "R1" and not decisao.aprovado
     assert modelo.chamadas == 0
+
+
+def test_consumo_do_modelo_do_juiz_vai_para_a_decisao():
+    modelo = ModeloFalso([VeredictoJuiz(aprovado=True)])
+    decisao = Juiz(modelo, sleep=lambda s: None).avaliar("O Essencial custa R$ 119,90.", PLANOS, "cotada", None)
+    assert decisao.tokens == 120
 
 
 def test_modelo_aprova():

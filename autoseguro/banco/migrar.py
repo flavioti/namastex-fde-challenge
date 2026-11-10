@@ -11,7 +11,7 @@ from pathlib import Path
 
 import psycopg
 
-from autoseguro.banco.conexao import MENSAGEM_BANCO_INDISPONIVEL, BancoIndisponivel
+from autoseguro.banco.conexao import MENSAGEM_BANCO_INDISPONIVEL, BancoIndisponivel, detalhe_erro
 
 PASTA_MIGRACOES = Path(__file__).parent / "migracoes"
 
@@ -42,7 +42,7 @@ def aplicar_migracoes(url: str, pasta: Path = PASTA_MIGRACOES) -> list[str]:
                 for linha in conexao.execute("SELECT nome FROM public.migracoes_aplicadas").fetchall()
             }
     except psycopg.OperationalError as erro:
-        raise BancoIndisponivel(MENSAGEM_BANCO_INDISPONIVEL) from erro
+        raise BancoIndisponivel(f"{MENSAGEM_BANCO_INDISPONIVEL}\nDetalhe: {detalhe_erro(erro)}") from erro
 
     aplicadas: list[str] = []
     for arquivo in listar_migracoes(pasta):

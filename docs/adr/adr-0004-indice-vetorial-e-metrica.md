@@ -25,6 +25,8 @@ data: 2026-11-09
 ## Consequências
 
 - Parâmetros do índice HNSW são ajustados na implementação, com os casos de recuperação.
+
+**Casos de recuperação (revisão).** Os casos estão em `tests/recuperacao/casos.json` e são rodados com o modelo real. Onze casos cobrem pro-rata, carência, idade do veículo, faixa etária, região e recusas. Os parâmetros do HNSW seguem nos padrões, porque todos os casos passam.
 - A consulta usa o mesmo operador de distância que o índice, para que o índice seja aproveitado.
 
 ## Alternativas consideradas

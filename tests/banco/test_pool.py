@@ -24,4 +24,5 @@ def test_pool_entrega_conexoes_utilizaveis(url_banco):
 def test_banco_inacessivel_gera_mensagem_para_o_avaliador():
     with pytest.raises(BancoIndisponivel) as erro:
         abrir_pool("postgresql://usuario:senha@127.0.0.1:1/inexistente", timeout=2.0)
-    assert str(erro.value) == MENSAGEM_BANCO_INDISPONIVEL
+    assert str(erro.value).startswith(MENSAGEM_BANCO_INDISPONIVEL)
+    assert "Detalhe:" in str(erro.value)

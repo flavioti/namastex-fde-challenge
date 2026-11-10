@@ -2,7 +2,7 @@
 
 Registro das dúvidas e decisões de implementação que não estavam explícitas nos documentos de design. Cada item diz o que foi feito e o que precisa de revisão. Ao final da implementação, o conjunto será revisado com o usuário.
 
-Situação geral: 188 testes passam. Cobrem banco, mascaramento, cliente da cotação, catálogo, juiz, agente, observabilidade e interface. A carga do catálogo rodou com o modelo e5 real. O agente não foi executado contra a API da Anthropic, porque a chave fica no `.env` do usuário.
+Situação geral: 203 testes passam. Cobrem banco, mascaramento, cliente da cotação, catálogo, juiz, agente, observabilidade e interface. A carga do catálogo rodou com o modelo e5 real. O agente não foi executado contra a API da Anthropic, porque a chave fica no `.env` do usuário.
 
 ## Ambiente e banco (FDD-0004, RFC-0003, RFC-0012)
 
@@ -15,14 +15,14 @@ Situação geral: 188 testes passam. Cobrem banco, mascaramento, cliente da cota
 | T-05 | Variáveis do compose | Feito | O serviço `banco` exige `POSTGRES_USER`, `POSTGRES_PASSWORD` e `POSTGRES_DB` no `.env`, documentadas no `.env.example`. | Confirmar que o `.env` local tem as três variáveis. |
 | T-06 | Motivos de encaminhamento | Feito | Os motivos usados são os da FDD-0001, seção 7, mais "Falha do modelo", "Falha do juiz" e "Resposta reprovada pelo juiz" (ver T-19). | Sim, junto com T-19. |
 | T-07 | Parâmetros do HNSW | Feito | Padrões do pgvector, conforme o ADR-0004. | Sim, depois dos casos de recuperação com o modelo real (T-10). |
-| T-08 | Cache do modelo de embeddings | **Pendente de decisão** | O RFC-0004 prevê o modelo em `database/modelos`. A pasta `database/` foi criada pelo Docker como root, e o usuário não consegue gravar nela. Adicionada a variável `AUTOSEGURO_MODELOS`. A carga real rodou com o cache em `~/.cache/autoseguro/modelos`. | Sim. Opções: `sudo chown` em `database/`, ou aceitar outro caminho e atualizar a RFC-0004. |
+| T-08 | Cache do modelo de embeddings | Resolvido | Dono de `database/` ajustado para o usuário com `sudo chown magitek:magitek database`, sem recursão, para não afetar os dados do Postgres em `database/18`. O cache do modelo fica em `database/modelos`, conforme a RFC-0004. A carga roda com o caminho padrão. | Não. A variável `AUTOSEGURO_MODELOS` continua disponível como alternativa. |
 
 ## Catálogo e embeddings (FDD-0008, RFC-0004)
 
 | # | Item | Situação | Decisão tomada | Revisar |
 | --- | --- | --- | --- | --- |
 | T-09 | Carga real com o modelo e5 | Feito | Carga executada contra o banco de desenvolvimento: 3 planos, 12 regras e 12 trechos. A segunda execução não reembeda nada. | Não. |
-| T-10 | Qualidade da busca com o modelo real | Pendente | Para "pro-rata" e "carência", o trecho certo fica em primeiro. Para "prêmio para motorista jovem de 19 anos", a faixa de 18 a 24 anos não aparece entre os três primeiros. | Sim. Criar os casos de recuperação do ADR-0004 e ajustar os textos ou o HNSW. |
+| T-10 | Qualidade da busca com o modelo real | Resolvido | 11 casos de recuperação em `tests/recuperacao/casos.json`. Um falhou. A redação da faixa etária foi ajustada para 'Para motorista com idade de', com versão dos textos 2. Todos os casos passam. | Não. |
 | T-11 | Fonte da carga | Feito | A carga lê `quote-service/data/plans.json`. Preços são `Decimal`. | Não. |
 | T-12 | Pro-rata na resposta da API | Feito | O FDD-0002 diz que `primeiro_pagamento_pro_rata` é `Decimal`. A API devolve um objeto com `valor_primeiro_pagamento`. O cliente extrai o valor. | Confirmar com a RFC-0006 se o objeto deve ser mantido. |
 | T-13 | Ordem dos padrões de mascaramento | Feito | Cada padrão roda sobre o texto original, e um trecho já coberto por um padrão anterior não é casado de novo. O FDD diz "em sequência", com o mesmo resultado para os padrões atuais. | Não. |
@@ -44,10 +44,10 @@ Situação geral: 188 testes passam. Cobrem banco, mascaramento, cliente da cota
 | T-19 | Motivos fora do FDD | Feito | "Falha do modelo", "Falha do juiz" e "Resposta reprovada pelo juiz" não estão nas listas do FDD-0001. O motivo "falha do juiz" segue o FDD-0009. | Sim. |
 | T-20 | Interface pública do agente | Feito | O FDD-0005 fala em funções `turno` e `ler_estado`. Implementei uma classe `Agente` com esses dois métodos. | Não. |
 | T-21 | CEP no painel | Feito | `ler_estado` devolve o CEP como `[CEP]`. O FDD-0005 pede a forma mascarada usada pelo painel. | Confirmar o formato desejado. |
-| T-22 | Textos dos roteiros | **Pendente de revisão** | Os textos de `agente/roteiros.py` e as mensagens de encaminhamento foram redigidos pela implementação. | Sim, junto com o produto (João). |
+| T-22 | Textos dos roteiros | Resolvido | Textos revisados pelo usuário. | Não. |
 | T-23 | Redação que falha | Feito, com desvio | O FDD-0006 pede descarte do run quando a redação falha. O SDK do LangSmith só oferece ocultação de entradas e saídas. Quando a redação falha, o run segue sem conteúdo, e nenhum dado pessoal sai. | Sim. |
-| T-24 | Referência de trace na conversa | **Pendente** | O FDD-0006 pede gravar o identificador do trace raiz em `registro.referencias_trace`. O agente ainda não grava esse identificador. Os metadados e as tags já são enviados. | Sim. |
-| T-25 | Tokens do juiz no teto | **Pendente** | O FDD-0005 soma tokens de agente e juiz. O cliente do juiz ainda não devolve o consumo, então só o agente conta no teto. | Sim. |
+| T-24 | Referência de trace na conversa | Resolvido | O run do turno tem identificador gerado pela aplicação. Ele é gravado em `registro.referencias_trace` na primeira execução, quando o tracing está ativo. | Não. A ligação com o LangSmith real ainda não foi testada, porque depende da chave. |
+| T-25 | Tokens do juiz no teto | Resolvido | O consumo do juiz é somado ao teto de 50 mil tokens. | Não. |
 | T-26 | Tentativas em plano e consentimento | Feito | Resposta sem plano ou sem sim/não só repete a pergunta, e não conta como tentativa inválida. O FDD-0001 fala em dado inválido apenas para os quatro campos de coleta. | Confirmar. |
 | T-27 | Lista de DDDs e nomes | Feito | Os nomes e DDDs ficam em `ui-app/leads.toml`, editável. | Não. |
 
@@ -68,17 +68,45 @@ Situação geral: 188 testes passam. Cobrem banco, mascaramento, cliente da cota
 
 | # | Item | Situação | Decisão tomada | Revisar |
 | --- | --- | --- | --- | --- |
-| T-31 | Feedback do juiz no trace | Feito, sem ligação | `registrar_feedbacks` existe e é testado, mas ainda não é chamado pelo nó do juiz, porque o identificador do run não está disponível (ver T-24). | Sim, junto com T-24. |
+| T-31 | Feedback do juiz no trace | Resolvido | Os feedbacks `juiz_regra_1` a `juiz_regra_4` e `juiz_decisao` são enviados ao run do turno. | Não. |
 
 ## Execução ponta a ponta
 
 | # | Item | Situação | Decisão tomada | Revisar |
 | --- | --- | --- | --- | --- |
-| T-32 | Execução com a API da Anthropic | **Pendente de verificação** | O agente foi testado com modelos substitutos. A chamada real depende de `ANTHROPIC_API_KEY` no `.env` do usuário, que não consultei. | Sim. Rodar a interface com `RESPONDEDOR=agente` e conferir uma conversa completa. |
-| T-33 | README de execução e decisões | **Pendente** | O README atual é o enunciado do desafio. O README de execução e de decisões será escrito na revisão final. | Sim. |
+| T-32 | Execução com a API da Anthropic | Feito | Teste conduzido pelo usuário. Ajustes, se necessários, entram na próxima revisão. | Não. |
+| T-33 | README | Pendente, fora desta revisão | O README.md pertence ao projeto de avaliação e não será alterado. A documentação do projeto será feita no README2.md, quando o projeto for documentado. | Sim, na documentação. |
 
 ## Pendências externas
 
 | # | Item | Responsável | Situação |
 | --- | --- | --- | --- |
 | E-01 | Confirmação das regras de preço e elegibilidade da tabela de planos (PRD, seção 9). | AutoSeguro | Externa, a confirmar. Até lá, `plans.json` é a fonte de verdade. Não bloqueia a implementação. |
+
+## Decisões da revisão
+
+| # | Item | Decisão | Onde está registrado |
+| --- | --- | --- | --- |
+| T-02 | Identificador do trecho | Mantido | FDD-0004, seção 6 |
+| T-17 | Pedido de humano e desistência por lista fixa | Mantido | FDD-0005, seção 5 |
+| T-18 | Recusa e falha da cotação sem redação do modelo | Mantido | FDD-0005, seção 5 |
+| T-19 | Motivos fora da FDD-0001 | Incluídos na FDD-0001 | FDD-0001, seção 7 |
+| T-23 | Redação que falha segue sem conteúdo | Aceito como desvio | FDD-0006, seção 6 |
+
+
+## Decisões da segunda rodada da revisão
+
+| # | Item | Decisão | Onde está registrado |
+| --- | --- | --- | --- |
+| T-10 | Casos de recuperação | Criados e rodados com o modelo real. Redação da faixa etária ajustada. | FDD-0008, seção 6; ADR-0004; rastreabilidade |
+| T-24 e T-31 | Trace e feedback do juiz | Implementados. Referência gravada no primeiro turno. | FDD-0006, seção 7 |
+| T-25 | Tokens do juiz | Contam no teto. | FDD-0005, seção 9 |
+| T-22 | Textos dos roteiros | Revisados pelo usuário. | Sem alteração de documento |
+| T-32 | Conversa real | Testada pelo usuário. | Sem alteração de documento |
+| T-33 | README | Não alterar o README.md. Documentação em README2.md, depois. | Sem alteração de documento |
+
+## Desvio de API (T-34)
+
+| # | Item | Situação | Decisão tomada | Revisar |
+| --- | --- | --- | --- | --- |
+| T-34 | Temperatura 0 nos modelos | Desvio aceito | Os modelos `claude-haiku-5-5` e `claude-opus-5-5` recusam o parâmetro `temperature` com erro 400. Ele foi removido do adaptador. A RFC-0005 pede temperatura 0, então o determinismo não é garantido pela API. | Sim. Confirmar se o desvio é aceito e registrar na RFC-0005. |

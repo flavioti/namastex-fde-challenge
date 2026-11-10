@@ -93,6 +93,8 @@ A função `redacao.py` recebe o conteúdo de cada run antes do envio.
 3. A função devolve o payload redigido. Nunca devolve o payload original.
 4. Se a função lançar qualquer exceção, o run é descartado. Nenhum conteúdo do run é enviado, e um registro de erro é emitido pelo módulo de logs, sem o conteúdo do run.
 
+**Desvio aceito na revisão.** O SDK do LangSmith permite ocultar entradas e saídas, mas não descartar o run pela função de redação. Quando a redação falha, o run segue sem conteúdo. Nenhum dado pessoal sai da aplicação.
+
 O cliente é construído em `cliente.py` com a função de redação aplicada às entradas e às saídas de cada run.
 
 ## 7. Vínculo entre conversa e trace
@@ -100,6 +102,8 @@ O cliente é construído em `cliente.py` com a função de redação aplicada à
 Na primeira execução de um turno, o identificador do trace raiz é gravado em `registro.referencias_trace`, junto com a conversa, conforme a [[fdd-0004-banco-e-migracoes]]. Nos turnos seguintes, a referência é reaproveitada, e não é regravada.
 
 Se a gravação da referência falhar, o turno segue normalmente. A falha é registrada em log, sem o conteúdo do turno.
+
+**Identificador do run (decisão da revisão).** Cada turno recebe um identificador de run gerado pela aplicação, que é o trace raiz. Esse identificador é gravado na primeira execução, quando o tracing está ativo, e é usado pelos feedbacks do juiz, enviados no mesmo turno.
 
 ## 8. Feedback do juiz
 

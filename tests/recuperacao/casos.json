@@ -1,0 +1,13 @@
+[
+  {"consulta": "pro-rata da primeira parcela", "tipo": "pro_rata", "posicao": 1},
+  {"consulta": "primeiro pagamento proporcional aos dias do mês", "tipo": "pro_rata", "posicao": 3},
+  {"consulta": "tempo de espera para roubo", "tipo": "carencia", "posicao": 1},
+  {"consulta": "carência para furto do veículo", "tipo": "carencia", "posicao": 3},
+  {"consulta": "carro com mais de 20 anos", "tipo": "idade_veiculo", "posicao": 3},
+  {"consulta": "veículo de 3 anos", "tipo": "idade_veiculo", "posicao": 3},
+  {"consulta": "motorista de 19 anos", "tipo": "faixa_etaria", "posicao": 3},
+  {"consulta": "idade de 62 anos", "tipo": "faixa_etaria", "posicao": 3},
+  {"consulta": "cliente com 80 anos", "tipo": "faixa_etaria", "posicao": 3},
+  {"consulta": "CEP com prefixo 07", "tipo": "regiao_cep", "posicao": 1},
+  {"consulta": "região de alto risco", "tipo": "regiao_cep", "posicao": 3}
+]

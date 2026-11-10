@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+import uuid
 from datetime import datetime, timezone
 
 import httpx
@@ -12,6 +13,7 @@ from langchain_core.messages import AIMessage, ToolMessage
 from autoseguro.agente import Agente, Dependencias, criar_pool_agente
 from autoseguro.agente.roteiros import ROTEIROS
 from autoseguro.banco.conexao import abrir_pool
+from autoseguro.banco.repositorios import avaliacoes
 from autoseguro.banco.repositorios import conversas
 from autoseguro.cotacao import CotacaoClient
 from autoseguro.juiz import Juiz, VeredictoJuiz
@@ -56,9 +58,10 @@ class ModeloAgenteFalso:
 class JuizFalso:
     """Saída do modelo do juiz, roteirizada. Devolve aprovado quando a lista acaba."""
 
-    def __init__(self, saidas=None):
+    def __init__(self, saidas=None, tokens=0):
         self.saidas = list(saidas or [])
         self.chamadas = 0
+        self.tokens = tokens
 
     def estruturar(self, sistema, conteudo, schema):
         self.chamadas += 1
@@ -66,8 +69,8 @@ class JuizFalso:
             saida = self.saidas.pop(0)
             if isinstance(saida, Exception):
                 raise saida
-            return saida
-        return VeredictoJuiz(aprovado=True)
+            return saida, self.tokens
+        return VeredictoJuiz(aprovado=True), self.tokens
 
 
 def _plano(plano_id: str, nome: str) -> dict:
@@ -101,7 +104,7 @@ def ambiente(url_banco):
     pool_registro.close()
 
 
-def _agente(ambiente, modelo, juiz_modelo=None, transporte="ok"):
+def _agente(ambiente, modelo, juiz_modelo=None, transporte="ok", cliente_trace=None):
     cotacao = CotacaoClient(BASE, transporte=_transporte(transporte), sleep=lambda s: None)
     deps = Dependencias(
         modelo_agente=modelo,
@@ -109,8 +112,17 @@ def _agente(ambiente, modelo, juiz_modelo=None, transporte="ok"):
         cotacao=cotacao,
         pool=ambiente["registro"],
         sleep=lambda s: None,
+        cliente_trace=cliente_trace,
     )
     return Agente(deps, ambiente["checkpoint"]), cotacao
+
+
+class ClienteTraceFalso:
+    def __init__(self):
+        self.feedbacks = []
+
+    def create_feedback(self, run_id, key, score, comment):
+        self.feedbacks.append({"run_id": run_id, "key": key, "score": score})
 
 
 def _conversar(agente, conversa_id, mensagens):
@@ -289,3 +301,33 @@ def test_turno_depois_de_encaminhada_nao_responde(ambiente):
     depois = agente.turno(conversa, "35")
     assert depois.texto is None
     assert depois.status == "encaminhada"
+
+
+def test_consumo_do_juiz_conta_no_teto(ambiente):
+    agente, _ = _agente(ambiente, ModeloAgenteFalso(), juiz_modelo=JuizFalso(tokens=60_000))
+    conversa = ambiente["conversa"]
+    _conversar(agente, conversa, ["35", "2022", "01310-100", "15/12/2026"])  # o juiz aprova e gasta o teto
+    resposta = agente.turno(conversa, "premium")
+    assert resposta.encaminhada
+    assert _encaminhamento(ambiente["registro"], conversa)[0] == "Limite da conversa atingido"
+
+
+def test_feedbacks_do_juiz_vao_para_o_run_do_turno(ambiente):
+    cliente = ClienteTraceFalso()
+    agente, _ = _agente(ambiente, ModeloAgenteFalso(), cliente_trace=cliente)
+    conversa = ambiente["conversa"]
+    _conversar(agente, conversa, ["35", "2022", "01310-100", "15/12/2026"])
+    chaves = {f["key"] for f in cliente.feedbacks}
+    assert chaves == {"juiz_regra_1", "juiz_regra_2", "juiz_regra_3", "juiz_regra_4", "juiz_decisao"}
+    run_ids = {str(f["run_id"]) for f in cliente.feedbacks}
+    assert len(run_ids) == 1  # todos no mesmo run do turno em que o juiz avaliou
+
+
+def test_referencia_do_trace_e_gravada_uma_vez(ambiente):
+    agente, _ = _agente(ambiente, ModeloAgenteFalso())
+    conversa = ambiente["conversa"]
+    primeiro = uuid.uuid4()
+    agente._gravar_referencia_trace(conversa, str(primeiro))
+    agente._gravar_referencia_trace(conversa, str(uuid.uuid4()))
+    with ambiente["registro"].connection() as c:
+        assert avaliacoes.obter_referencia_trace(c, conversa) == str(primeiro)

@@ -14,12 +14,12 @@ def _regra(tipo: str, dados: dict) -> Regra:
 
 def test_faixa_etaria_com_virgula_decimal():
     regra = _regra("faixa_etaria", {"idade_min": 18, "idade_max": 24, "multiplicador": 1.6})
-    assert texto_da_regra(regra) == "Para idade de 18 a 24 anos, o multiplicador do prêmio é 1,6."
+    assert texto_da_regra(regra) == "Para motorista com idade de 18 a 24 anos, o multiplicador do prêmio é 1,6."
 
 
 def test_faixa_etaria_com_multiplicador_inteiro():
     regra = _regra("faixa_etaria", {"idade_min": 30, "idade_max": 59, "multiplicador": 1.0})
-    assert texto_da_regra(regra) == "Para idade de 30 a 59 anos, o multiplicador do prêmio é 1."
+    assert texto_da_regra(regra) == "Para motorista com idade de 30 a 59 anos, o multiplicador do prêmio é 1."
 
 
 def test_recusa_de_idade_usa_motivo_do_plans():

@@ -183,6 +183,8 @@ Todas as chaves primárias são UUID, conforme a [[adr-0009-identificadores-uuid
 
 A coluna `texto_busca` é gerada pelo próprio Postgres, conforme a decisão do usuário. Não há trigger.
 
+**Identificador do trecho (decisão da revisão).** O identificador de cada trecho é um UUID v5 derivado do identificador da regra. Não há índice único em `regra_id`. A carga garante que cada regra tenha exatamente um trecho, por meio do upsert pelo identificador derivado.
+
 ## 7. Índices
 
 | Tabela | Índice | Finalidade |

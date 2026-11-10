@@ -85,13 +85,15 @@ Cada tipo de regra tem um modelo de frase fixo em `textos.py`. O texto é preenc
 
 | Tipo | Modelo |
 | --- | --- |
-| `faixa_etaria` | Para idade de {idade_min} a {idade_max} anos, o multiplicador do prêmio é {multiplicador}. |
+| `faixa_etaria` | Para motorista com idade de {idade_min} a {idade_max} anos, o multiplicador do prêmio é {multiplicador}. |
 | `faixa_etaria`, com recusa | Não é possível cotar para idade de {idade_min} a {idade_max} anos. {motivo} |
 | `idade_veiculo` | Para veículo com {anos_min} a {anos_max} anos, o multiplicador do prêmio é {multiplicador}. |
 | `idade_veiculo`, com recusa | Não é possível cotar veículo com {anos_min} a {anos_max} anos. {motivo} |
 | `regiao_cep` | CEPs com os prefixos {prefixos} são de alto risco, com multiplicador {multiplicador}. |
 | `carencia` | As coberturas {coberturas} têm carência de {dias} dias, contados da data de início da vigência. |
 | `pro_rata` | Quando a vigência começa no meio do mês, o primeiro pagamento é proporcional aos dias restantes do mês. Os meses seguintes são integrais. |
+
+**Revisão.** O texto de faixa etária passou a dizer "Para motorista com idade de". A versão dos textos passa a ser 2. Os casos de recuperação do ADR-0004 mostraram que a consulta "motorista de 19 anos" não encontrava a faixa de 18 a 24 anos com a redação anterior.
 
 A versão do modelo de frase faz parte da impressão digital do trecho. Mudar uma frase exige recalcular os trechos desse tipo, mesmo que os valores não tenham mudado.
 

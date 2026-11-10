@@ -21,7 +21,7 @@ PREFIXO_DOCUMENTO = "passage: "
 PASTA_MODELOS = Path(os.environ.get("AUTOSEGURO_MODELOS", RAIZ_PROJETO / "database" / "modelos"))
 
 # Versão dos modelos de frase. Mudar uma frase exige recalcular os trechos desse tipo (FDD-0008, seção 6).
-VERSAO_TEXTOS = "1"
+VERSAO_TEXTOS = "2"
 
 # Namespace fixo do projeto para UUID v5 das regras (FDD-0008, seção 5; ADR-0009).
 NAMESPACE_REGRAS = uuid.uuid5(uuid.NAMESPACE_URL, "autoseguro.catalogo.regras")
