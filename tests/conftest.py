@@ -44,3 +44,9 @@ def conexao(url_banco):
         c.execute("SELECT 1")
         yield c
         c.rollback()
+
+
+@pytest.fixture(autouse=True)
+def pasta_de_execucoes(tmp_path, monkeypatch):
+    """Os testes gravam os logs de execução numa pasta temporária, nunca em execucoes/."""
+    monkeypatch.setenv("AUTOSEGURO_EXECUCOES", str(tmp_path / "execucoes"))

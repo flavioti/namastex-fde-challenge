@@ -77,6 +77,14 @@
       "sub": "amostra de 50",
       "status": "decidido",
       "fonte": "[[rfc-0011-avaliacao-e-testes]] [[adr-0016-biblioteca-de-testes-pytest]]"
+    },
+    "registro": {
+      "type": "db",
+      "x": 420,
+      "y": 640,
+      "label": "registro",
+      "status": "decidido",
+      "fonte": "[[fdd-0006-observabilidade]] [[adr-0017-metadados-de-trace-dicionario-unico]]"
     }
   },
   "edges": {
@@ -179,6 +187,26 @@
           352
         ]
       ]
+    },
+    "e_agente_registro": {
+      "pts": [
+        [
+          80,
+          300
+        ],
+        [
+          60,
+          300
+        ],
+        [
+          60,
+          640
+        ],
+        [
+          365,
+          640
+        ]
+      ]
     }
   },
   "scenes": [
@@ -238,6 +266,24 @@
     {
       "title": [
         "3. ",
+        "referência"
+      ],
+      "sub": [
+        "trace raiz da conversa ",
+        "gravado no primeiro turno"
+      ],
+      "cap": "identificador do run, sem dado pessoal",
+      "nodes": [
+        "agente",
+        "registro"
+      ],
+      "packets": [
+        "e_agente_registro"
+      ]
+    },
+    {
+      "title": [
+        "4. ",
         "rodadas"
       ],
       "sub": [
@@ -259,7 +305,7 @@
     },
     {
       "title": [
-        "4. ",
+        "5. ",
         "concordância"
       ],
       "sub": [

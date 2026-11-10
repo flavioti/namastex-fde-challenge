@@ -132,7 +132,7 @@ O MVP testa se um agente consegue resolver a parte repetitiva da conversa e reco
 
 | Dependência | Responsável | Tipo |
 | --- | --- | --- |
-| Confirmação das regras de preço e elegibilidade da tabela de planos | AutoSeguro | Externa, a confirmar |
+| Confirmação das regras de preço e elegibilidade da tabela de planos | AutoSeguro | Resolvida: `plans.json` é a fonte de verdade, confirmado pelo usuário |
 | Texto de consentimento para o CPF | AutoSeguro e jurídico | Externa, assumida como aprovada para a simulação |
 | Chave de acesso ao modelo de linguagem | Usuário | Interna, fornecida no arquivo de ambiente |
 | Conta de observabilidade, gratuita e pública | Usuário | Interna |

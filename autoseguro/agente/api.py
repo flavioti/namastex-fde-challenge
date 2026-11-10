@@ -17,6 +17,7 @@ from autoseguro.agente.estado import DadosColeta, StatusConversa
 from autoseguro.agente.grafo import construir
 from autoseguro.agente.llm import MODELO_AGENTE
 from autoseguro.agente.nos import Dependencias
+from autoseguro.execucao import RegistroExecucao
 from autoseguro.banco.repositorios import avaliacoes
 from autoseguro.observabilidade import config as obs_config
 from autoseguro.logs import obter_logger
@@ -59,6 +60,7 @@ class Agente:
         if deps.cliente_trace is None:
             deps.cliente_trace = self._cliente_trace
         self._pool_registro = deps.pool
+        self._execucao = RegistroExecucao()
         self._grafo = construir(deps, self._saver)
 
     @staticmethod
@@ -97,15 +99,21 @@ class Agente:
             obs_config.CHAVES["modelo"]: MODELO_AGENTE,
             obs_config.CHAVES["tipo_execucao"]: self._tipo_execucao,
         }
-        with tracing_context(
-            project_name=obs_config.PROJETO,
-            tags=[self._tipo_execucao],
-            metadata=metadados,
-            client=self._cliente_trace,
-            enabled=obs_config.tracing_ativo(),
-        ):
-            resultado = self._grafo.invoke(entrada, {**self._config(conversa_id), "run_id": run_id})
-        status = _valor(resultado, "status", "em_andamento")
+        with self._execucao.turno(conversa_id, texto) as registro:
+            with tracing_context(
+                project_name=obs_config.PROJETO,
+                tags=[self._tipo_execucao],
+                metadata=metadados,
+                client=self._cliente_trace,
+                enabled=obs_config.tracing_ativo(),
+            ):
+                resultado = self._grafo.invoke(entrada, {**self._config(conversa_id), "run_id": run_id})
+            status = _valor(resultado, "status", "em_andamento")
+            registro.update(
+                resposta=_valor(resultado, "resposta_turno"),
+                status=status,
+                motivo=_valor(resultado, "motivo_encaminhamento") if status == "encaminhada" else None,
+            )
         return RespostaTurno(
             texto=_valor(resultado, "resposta_turno"),
             status=status,

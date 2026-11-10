@@ -144,3 +144,8 @@ A conversa passa para encerrada quando o lead diz que não quer mais, ou quando 
 - [[rfc-0006-servico-de-cotacao]]: faixas, regras de cotação e erros do serviço.
 - [[rfc-0007-agente-langgraph-langchain]]: etapas do grafo e teto de tokens.
 - [[rfc-0008-mascaramento-de-dados-pessoais]]: tratamento do CEP e do CPF.
+
+## Decisões da revisão de pendências
+
+- **Limite de perguntas (T-37).** Após cinco perguntas seguidas fora do contexto, a conversa é encaminhada com o motivo "Perguntas fora do contexto". Uma resposta válida zera o contador.
+- **Plano e consentimento (T-26).** Resposta sem plano escolhido ou sem sim ou não de consentimento só repete a pergunta. Não conta como tentativa inválida.

@@ -273,3 +273,7 @@ Os testes não chamam a API real. Os modelos são substituídos por dublês que 
 - [[fdd-0002-cliente-da-cotacao]]: cliente que executa a cotação.
 - [[fdd-0003-mascaramento-de-dados-pessoais]]: mascaramento de entrada e saída.
 - [[fdd-0004-banco-e-migracoes]]: checkpoint e registro de encaminhamentos.
+
+## Decisão de revisão: dados juntos numa mensagem
+
+Uma mensagem pode trazer mais de um dado, desde que o dado tenha rótulo ou formato claro: idade com a palavra "idade" ou "anos", ano com "ano" ou "fabricação", CEP e CPF pelo formato. Os dados válidos são guardados de uma vez, e o agente pergunta só o que falta. Dados sem rótulo, como "tenho uns 35", continuam sendo texto livre e contam como tentativa. O CPF só é guardado depois do consentimento. Essa decisão altera a regra de texto livre desta seção.

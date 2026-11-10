@@ -85,6 +85,35 @@ def eh_outro_contexto(texto: str) -> bool:
     return bool(_INICIO_DE_PERGUNTA.search(texto) or _SAUDACAO.search(texto))
 
 
+_ROTULO_IDADE = re.compile(r"\bidade\b\D{0,15}?(\d{1,3})\b|\b(\d{1,3})\s*anos\b", re.IGNORECASE)
+_ROTULO_ANO = re.compile(r"\b(?:ano|fabrica[cç][aã]o)\b\D{0,20}?(\d{4})\b", re.IGNORECASE)
+_CEP_QUALQUER = re.compile(r"\b\d{5}-?\d{3}\b")
+_CPF_QUALQUER = re.compile(r"\b\d{3}\.?\d{3}\.?\d{3}-?\d{2}\b")
+
+
+def extrair_campos_rotulados(texto: str, hoje: date | None = None) -> dict[str, object]:
+    """Dados válidos numa mensagem que tem rótulo ou formato claro: idade com 'idade' ou 'anos', ano com
+    'ano' ou 'fabricação', CEP e CPF pelo formato. Dados sem rótulo, como 'tenho uns 35', não são extraídos."""
+    campos: dict[str, object] = {}
+    casamento = _ROTULO_IDADE.search(texto)
+    if casamento:
+        idade = extrair_idade(casamento.group(1) or casamento.group(2))
+        if idade is not None:
+            campos["idade"] = idade
+    casamento = _ROTULO_ANO.search(texto)
+    if casamento:
+        ano = extrair_ano_veiculo(casamento.group(1), hoje)
+        if ano is not None:
+            campos["ano_veiculo"] = ano
+    casamento = _CEP_QUALQUER.search(texto)
+    if casamento and extrair_cep(casamento.group(0)):
+        campos["cep"] = extrair_cep(casamento.group(0))
+    casamento = _CPF_QUALQUER.search(texto)
+    if casamento and extrair_cpf(casamento.group(0)):
+        campos["cpf"] = extrair_cpf(casamento.group(0))
+    return campos
+
+
 def extrair_plano(texto: str) -> str | None:
     encontrados = [p for p in PLANOS if re.search(rf"\b{p}\b", texto, re.IGNORECASE)]
     return encontrados[0] if len(encontrados) == 1 else None

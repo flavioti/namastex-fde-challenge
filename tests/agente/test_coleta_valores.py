@@ -101,3 +101,22 @@ def test_consentimento(texto, esperado):
 ])
 def test_outro_contexto(texto, esperado):
     assert cv.eh_outro_contexto(texto) == esperado
+
+
+def test_prompt_restringe_o_agente_a_cotacao():
+    from autoseguro.agente import roteiros
+
+    assert "não responda" in roteiros.FORA_DO_CONTEXTO
+    assert "só pode ajudar com a cotação" in roteiros.FORA_DO_CONTEXTO
+    assert "não responda perguntas sobre outros assuntos" in roteiros.SISTEMA_BASE
+
+
+@pytest.mark.parametrize("texto, esperado", [
+    ("Minha idade é 42 e meu cep é 01310-100", {"idade": 42, "cep": "01310-100"}),
+    ("tenho 35 anos", {"idade": 35}),
+    ("ano de fabricação 2012", {"ano_veiculo": 2012}),
+    ("tenho uns 35", {}),
+    ("meu CPF é 123.456.789-09", {"cpf": "12345678909"}),
+])
+def test_campos_rotulados(texto, esperado):
+    assert cv.extrair_campos_rotulados(texto, HOJE) == esperado

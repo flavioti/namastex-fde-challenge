@@ -1,0 +1,3 @@
+[server]
+# Recarrega a página quando um arquivo muda, inclusive os módulos do pacote autoseguro.
+runOnSave = true

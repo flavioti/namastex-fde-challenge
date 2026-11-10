@@ -338,7 +338,7 @@ def test_modelo_e_avisado_de_que_o_cep_foi_recebido(ambiente):
     agente, _ = _agente(ambiente, modelo)
     conversa = ambiente["conversa"]
     _conversar(agente, conversa, ["35", "2022", "01310-100"])
-    assert any("O dado CEP foi recebido nesta mensagem" in texto for texto in modelo.recebido)
+    assert any("Os dados recebidos nesta mensagem (CEP)" in texto for texto in modelo.recebido)
     assert not any("CEP ainda não" in texto for texto in modelo.recebido)
 
 
@@ -355,3 +355,33 @@ def test_tres_respostas_invalidas_ainda_encaminham_apos_perguntas(ambiente):
     conversa = ambiente["conversa"]
     _conversar(agente, conversa, ["Para que serve?", "trinta", "abc", "xx"])
     assert _encaminhamento(ambiente["registro"], conversa)[0] == "Dado inválido após tentativas"
+
+
+def test_cinco_perguntas_seguidas_encaminham(ambiente):
+    agente, _ = _agente(ambiente, ModeloAgenteFalso())
+    conversa = ambiente["conversa"]
+    respostas = _conversar(agente, conversa, ["Para que serve?", "Qual o preço?", "Como funciona?",
+                                             "O que é isso?", "Quanto custa?"])
+    assert respostas[-1].encaminhada
+    assert _encaminhamento(ambiente["registro"], conversa)[0] == "Perguntas fora do contexto"
+
+
+def test_resposta_valida_zera_o_contador_de_perguntas(ambiente):
+    agente, _ = _agente(ambiente, ModeloAgenteFalso())
+    conversa = ambiente["conversa"]
+    antes = _conversar(agente, conversa, ["Para que serve?", "Qual o preço?", "Como funciona?", "O que é isso?",
+                                         "35", "Para que serve?", "Qual o preço?", "Como funciona?",
+                                         "O que é isso?"])
+    assert not antes[-1].encaminhada  # quatro perguntas depois da resposta válida, abaixo do limite
+    assert agente.turno(conversa, "O que é isso?").encaminhada  # a quinta encaminha
+
+
+def test_dados_juntos_numa_mensagem_sao_guardados(ambiente):
+    modelo = ModeloAgenteFalso()
+    agente, _ = _agente(ambiente, modelo)
+    conversa = ambiente["conversa"]
+    resposta = agente.turno(conversa, "Minha idade é 42 e meu cep é 01310-100")
+    estado = agente.ler_estado(conversa)
+    assert estado.dados["idade"] == 42
+    assert estado.dados["cep"] == "[CEP]"
+    assert resposta.texto == "[pergunta:ano_veiculo]"

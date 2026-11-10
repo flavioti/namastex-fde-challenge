@@ -148,3 +148,7 @@ As regras vêm de `plans.json`, sem alteração. Os planos, as faixas, a região
 - [[rfc-0001-simulador-de-conversa]]: controle de falha retirado da tela, e configurado pelo serviço.
 - [[rfc-0005-modelo-llm-e-apis-externas]]: retry e uso da cotação como ferramenta.
 - Versionamento do contrato do serviço: só será criado se o contrato mudar.
+
+## Decisão de revisão: formato do pro-rata
+
+A API devolve `primeiro_pagamento_pro_rata` como objeto, com `dias_no_mes`, `dias_cobrados` e `valor_primeiro_pagamento`. O cliente da cotação extrai `valor_primeiro_pagamento` e o converte para `Decimal`. Esse formato é o contrato real do serviço.

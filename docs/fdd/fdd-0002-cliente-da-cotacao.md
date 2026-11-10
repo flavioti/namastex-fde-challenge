@@ -211,3 +211,7 @@ Os testes usam `httpx.MockTransport` e a função `sleep` injetada. Não há cha
 - [[rfc-0006-servico-de-cotacao]]: contrato do serviço e comportamento de erro.
 - [[rfc-0005-modelo-llm-e-apis-externas]]: política de retry para erros da API.
 - [[adr-0008-cliente-http-cotacao]]: escolha do cliente HTTP e do timeout.
+
+## Decisão de revisão: formato do pro-rata
+
+O campo `primeiro_pagamento_pro_rata` do `PlanoCotado` é um `Decimal` extraído de `valor_primeiro_pagamento`, porque a API devolve um objeto. Ver a RFC-0006.

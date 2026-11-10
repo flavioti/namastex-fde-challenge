@@ -32,6 +32,7 @@ cp .env.example .env
 | `LANGSMITH_API_KEY` | Só com tracing | Chave da conta do LangSmith. |
 | `LANGSMITH_TRACING` | Não | `true` envia os traces ao LangSmith. Padrão: `false`. |
 | `RESPONDEDOR` | Não | `teste` (padrão) ou `agente`. Ver a seção 4. |
+| `AUTOSEGURO_EXECUCOES` | Não | Pasta dos logs de execução, um arquivo por conversa. Padrão: `execucoes/`. |
 | `AUTOSEGURO_MODELOS` | Não | Caminho alternativo para o cache do modelo de embeddings. |
 
 O arquivo `.env` não é versionado. O `.env.example` é versionado e não tem valores.
@@ -72,6 +73,8 @@ uv run --env-file .env streamlit run ui-app/app.py
 
 A página abre em `http://localhost:8501`.
 
+O arquivo `.streamlit/config.toml` ativa o recarregamento automático: ao salvar um arquivo, a página é atualizada, e o agente é recriado com o código novo. Depois de criar ou alterar esse arquivo, reinicie o servidor uma vez.
+
 ## 4. Usando a simulação
 
 A barra lateral tem o botão **Nova conversa**, que cria um lead com nome e telefone fictícios. Esses dados vêm de `ui-app/leads.toml`, que pode ser editado sem mudar o código.
@@ -97,7 +100,9 @@ A aba **Encaminhados** lista as conversas que foram passadas para um humano, com
 4. O agente pede autorização para coletar o CPF. Se o lead recusar, a conversa é encaminhada, e a cotação continua registrada.
 5. Com o CPF, a conversa fica com status `cotada`.
 
-Uma conversa é encaminhada quando a cotação é recusada por regra, quando a cotação falha de forma persistente, quando o lead pede um atendente, quando o CPF não é autorizado, quando um dado inválido é informado três vezes seguidas, quando o modelo ou o juiz falham, e quando a conversa atinge o limite de tokens. Conversas encaminhadas e encerradas não recebem mais mensagens.
+O lead pode enviar vários dados na mesma mensagem, desde que tenham rótulo ou formato claro: "minha idade é 42 e meu CEP é 01310-100", por exemplo. Texto livre sem rótulo, como "tenho uns 35", conta como tentativa inválida.
+
+Uma conversa é encaminhada quando a cotação é recusada por regra, quando a cotação falha de forma persistente, quando o lead pede um atendente, quando o CPF não é autorizado, quando um dado inválido é informado três vezes seguidas, quando o modelo ou o juiz falham, e quando a conversa atinge o limite de tokens. Cinco perguntas seguidas que não respondem ao dado também encaminham a conversa, com o motivo "Perguntas fora do contexto". Conversas encaminhadas e encerradas não recebem mais mensagens.
 
 Cada turno é protegido por uma trava no banco. Se a mesma conversa estiver com um turno em andamento, a nova mensagem é recusada com o aviso "turno em andamento". A trava expira após 15 minutos.
 
@@ -137,6 +142,12 @@ system-design/    diagrama de arquitetura, gerado a partir de JSON
 Toda decisão de arquitetura ou de regra de negócio está em `docs/`, nesta ordem de abstração: PRD, RFCs, ADRs e FDDs. Antes de mudar um componente, leia o FDD correspondente. O arquivo `docs/rastreabilidade.md` registra cada alteração dos documentos e a decisão que a motivou.
 
 O arquivo `docs/tasks.md` lista as dúvidas e os desvios que surgiram na implementação, com a decisão tomada e o status de cada item. Ele serve de base para a revisão final.
+
+### Logs de execução
+
+Cada conversa gera um arquivo novo em `execucoes/`, com o nome `AAAAMMDD-HHMMSS-<id>.md`. O arquivo é criado no primeiro turno e recebe uma seção por turno, gravada logo ao fim dele. Cada seção traz a mensagem do lead e a resposta do agente, já mascaradas, o status, o encaminhamento se houver, os nós do grafo percorridos e os logs JSON do turno. Os registros de mascaramento ficam de fora, por serem repetitivos.
+
+Os logs começam a ser gravados a partir da execução da aplicação. Conversas anteriores não são reconstruídas.
 
 ### Diagrama de arquitetura
 
@@ -191,6 +202,9 @@ Uma regra removida do `plans.json` não é apagada. Ela fica inativa e sai da bu
 - O modelo de embeddings tem parâmetros HNSW nos padrões do pgvector.
 - O consumo do modelo do juiz no teto é contado, mas o consumo das tentativas que falharam não entra.
 - Os textos dos roteiros foram revisados, mas o tom final depende do produto.
+- O CPF digitado antes da autorização não é guardado. O agente pede de novo depois do sim.
+- Os registros de execução não trazem o status das mensagens, só o das conversas e o das cotações.
+- A temperatura não é enviada aos modelos, porque a família Claude 5 não aceita o parâmetro. As respostas podem variar entre execuções.
 
 ## 12. Referências
 

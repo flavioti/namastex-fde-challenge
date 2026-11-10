@@ -27,7 +27,7 @@ from autoseguro.cotacao import DadosCotacao
 from autoseguro.juiz import prompts as prompts_juiz
 from autoseguro.observabilidade.feedback import registrar_feedbacks
 from autoseguro.logs import obter_logger
-from autoseguro.mascaramento import detectar, mascarar_entrada, mascarar_saida
+from autoseguro.mascaramento import mascarar_entrada, mascarar_saida
 
 _log = obter_logger("autoseguro.agente")
 
@@ -44,6 +44,8 @@ MOTIVO_INDISPONIVEL = "Cotação indisponível"
 MOTIVO_FALHA_MODELO = "Falha do modelo"
 MOTIVO_FALHA_JUIZ = "Falha do juiz"
 MOTIVO_REPROVADA = "Resposta reprovada pelo juiz"
+MOTIVO_PERGUNTAS = "Perguntas fora do contexto"
+LIMITE_PERGUNTAS = 5  # perguntas seguidas que não respondem ao dado antes do encaminhamento
 
 # Frases de pedido de humano e de desistência. Lista fixa, a ser revisada (docs/tasks.md, T-17).
 _PEDIDO_HUMANO = ("atendente", "humano", "pessoa de verdade", "vendedor", "falar com alguém")
@@ -80,6 +82,8 @@ def _passo(dados, cotacao: Optional[dict]) -> Optional[str]:
         return "consentimento"
     if dados.consentimento_cpf and dados.cpf is None:
         return "cpf"
+    if dados.consentimento_cpf:
+        return "concluir"
     return None
 
 
@@ -89,6 +93,15 @@ def _texto_da_resposta(resposta: AIMessage) -> str:
         return conteudo.strip()
     partes = [b.get("text", "") for b in conteudo if isinstance(b, dict) and b.get("type") == "text"]
     return "".join(partes).strip()
+
+
+def _sem_raciocinio(resposta: AIMessage) -> AIMessage:
+    """Guarda a chamada de ferramenta sem os blocos de raciocínio. O estado do grafo altera esses blocos,
+    e a API recusa a assinatura alterada na chamada seguinte (docs/tasks.md, T-35)."""
+    conteudo = resposta.content
+    if isinstance(conteudo, list):
+        conteudo = [b for b in conteudo if not (isinstance(b, dict) and b.get("type") == "thinking")]
+    return AIMessage(content=conteudo, tool_calls=resposta.tool_calls, id=resposta.id)
 
 
 def _historico(mensagens: list[Mensagem], trocas: list[BaseMessage]) -> list[BaseMessage]:
@@ -129,17 +142,17 @@ def criar_nos(deps: Dependencias) -> dict[str, Callable[[EstadoConversa], dict]]
         texto = estado.texto_original or ""
         dados = estado.dados.model_copy()
         passo = _passo(dados, estado.cotacao)
-        capturou = False
-        recebido = None
-        for achado in detectar(texto):
-            if achado.tipo == "cep" and passo == "cep" and dados.cep is None:
-                dados.cep = cv.extrair_cep(achado.valor)
-                capturou = dados.cep is not None or capturou
-                recebido = "cep" if dados.cep else recebido
-            if achado.tipo == "cpf" and passo == "cpf" and dados.cpf is None:
-                dados.cpf = cv.extrair_cpf(achado.valor)
-                capturou = dados.cpf is not None or capturou
-                recebido = "cpf" if dados.cpf else recebido
+        rotulados = cv.extrair_campos_rotulados(texto)
+        capturados: list[str] = []
+        for nome in ("idade", "ano_veiculo", "cep"):
+            if getattr(dados, nome) is None and nome in rotulados:
+                setattr(dados, nome, rotulados[nome])
+                capturados.append(nome)
+        if passo == "cpf" and dados.cpf is None and "cpf" in rotulados:
+            dados.cpf = rotulados["cpf"]  # CPF só é guardado depois do consentimento
+            capturados.append("cpf")
+        capturou = bool(capturados)
+        recebido = ",".join(capturados) if capturados else None
 
         mascarado = mascarar_entrada(texto, estado.conversa_id).texto
         registro(repo_mensagens.registrar_mensagem, estado.conversa_id, "lead", mascarado)
@@ -188,6 +201,9 @@ def criar_nos(deps: Dependencias) -> dict[str, Callable[[EstadoConversa], dict]]
                     tentativas[passo] = 0
                 elif cv.eh_outro_contexto(texto):
                     fora_do_contexto = True  # pergunta ou saudação não conta como tentativa
+                    if estado.perguntas_seguidas + 1 >= LIMITE_PERGUNTAS:
+                        return {**base, "dados": dados, "tentativas": tentativas, "proxima": "encaminhamento",
+                                "motivo_encaminhamento": MOTIVO_PERGUNTAS}
                 else:
                     tentativas[passo] = tentativas.get(passo, 0) + 1
                     if tentativas[passo] >= 3:
@@ -207,21 +223,26 @@ def criar_nos(deps: Dependencias) -> dict[str, Callable[[EstadoConversa], dict]]
                 if autorizado is True:
                     dados.consentimento_cpf = True
 
+        base["perguntas_seguidas"] = estado.perguntas_seguidas + 1 if fora_do_contexto else 0
         passo = _passo(dados, cotacao)
         # A ferramenta fica disponível enquanto a cotação não foi feita, e sempre que a troca da ferramenta
         # estiver no histórico, pois a API exige a definição da ferramenta nesse caso.
         ferramentas = [consultar_cotacao] if (passo == "completo" or estado.trocas) else []
         sistema = _sistema(passo, base["campo_invalido"], estado.motivo_juiz, estado.resumo)
         if estado.recebido_agora:
-            sistema += "\n\n" + roteiros.RECEBIDO.format(nome=roteiros.NOMES_DADOS[estado.recebido_agora])
+            nomes = ", ".join(roteiros.NOMES_DADOS[n] for n in estado.recebido_agora.split(","))
+            sistema += "\n\n" + roteiros.RECEBIDO.format(nome=nomes)
         if fora_do_contexto:
             sistema += "\n\n" + roteiros.FORA_DO_CONTEXTO
         historico = _historico(estado.mensagens, estado.trocas)
 
         try:
             resposta = tentar(lambda: deps.modelo_agente.conversar(sistema, historico, ferramentas), deps.sleep)
-        except Exception:
-            _log.error("modelo do agente falhou após três tentativas", extra={"evento": "falha_modelo"})
+        except Exception as erro:
+            _log.error("modelo do agente falhou após três tentativas",
+                       extra={"evento": "falha_modelo",
+                              "detalhe": {"tipo": type(erro).__name__,
+                                          "mensagem": str(erro).splitlines()[0][:300] if str(erro) else ""}})
             return {**base, "dados": dados, "tentativas": tentativas, "proxima": "encaminhamento",
                     "motivo_encaminhamento": MOTIVO_FALHA_MODELO}
 
@@ -231,10 +252,13 @@ def criar_nos(deps: Dependencias) -> dict[str, Callable[[EstadoConversa], dict]]
                        "tokens_consumidos": estado.tokens_consumidos + tokens}
 
         if resposta.tool_calls and cotacao is None:
-            return {**atualizacao, "trocas": [resposta], "rascunho": None, "proxima": "cotacao"}
+            return {**atualizacao, "trocas": [_sem_raciocinio(resposta)], "rascunho": None, "proxima": "cotacao"}
 
         texto_resposta = _texto_da_resposta(resposta)
         if not texto_resposta:
+            _log.error("modelo devolveu resposta vazia", extra={"evento": "resposta_vazia",
+                                                                "detalhe": {"ferramentas": bool(resposta.tool_calls),
+                                                                            "content": type(resposta.content).__name__}})
             return {**atualizacao, "motivo_encaminhamento": MOTIVO_FALHA_MODELO, "proxima": "encaminhamento",
                     "rascunho": None}
         proxima = "juiz" if prompts_juiz.acionado(texto_resposta) else "resposta"
@@ -303,8 +327,22 @@ def criar_nos(deps: Dependencias) -> dict[str, Callable[[EstadoConversa], dict]]
         return {"status": "encerrada", "trocas": [], "texto_original": None, "rascunho": None, "proxima": "fim",
                 "resposta_turno": None}
 
-    return {"entrada": entrada, "coleta": coleta, "cotacao": cotacao, "juiz": juiz, "resposta": resposta,
-            "encaminhamento": encaminhamento, "encerramento": encerramento}
+    nos = {"entrada": entrada, "coleta": coleta, "cotacao": cotacao, "juiz": juiz, "resposta": resposta,
+           "encaminhamento": encaminhamento, "encerramento": encerramento}
+    return {nome: _observado(nome, funcao) for nome, funcao in nos.items()}
+
+
+def _observado(nome: str, funcao: Callable[[EstadoConversa], dict]) -> Callable[[EstadoConversa], dict]:
+    """Registra no log cada nó executado, com a próxima etapa escolhida. Rastro do turno."""
+
+    def executar(estado: EstadoConversa) -> dict:
+        resultado = funcao(estado)
+        _log.info("nó executado", extra={"evento": "no", "conversa_id": str(estado.conversa_id),
+                                         "detalhe": {"no": nome, "proxima": resultado.get("proxima"),
+                                                     "status": resultado.get("status")}})
+        return resultado
+
+    return executar
 
 
 def _extrair(passo: str, texto: str) -> Any:

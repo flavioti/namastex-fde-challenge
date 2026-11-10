@@ -2,9 +2,12 @@
 
 from __future__ import annotations
 
+from pathlib import Path
 from typing import Any, Optional
 
 import streamlit as st
+
+import autoseguro
 
 from autoseguro.banco.repositorios import conversas as repo_conversas
 from autoseguro.interface import consultas, leads
@@ -15,8 +18,15 @@ STATUS_BLOQUEADOS = ("encaminhada", "encerrada")
 CHAVE_AVISO = "aviso"
 
 
+def _versao_do_codigo() -> float:
+    """Data de modificação mais recente do pacote. Muda quando qualquer módulo muda."""
+    raiz = Path(autoseguro.__file__).parent
+    return max(arquivo.stat().st_mtime for arquivo in raiz.rglob("*.py"))
+
+
 @st.cache_resource
-def _servicos() -> Servicos:
+def _servicos(versao: float) -> Servicos:
+    """Recria o agente quando o código muda. O parâmetro faz parte da chave da cache."""
     return montar_servicos()
 
 
@@ -85,7 +95,7 @@ def _conversa(pool, responder, conversa_id) -> None:
 def executar() -> None:
     st.set_page_config(page_title="AutoSeguro · simulação", layout="wide")
     try:
-        servicos = _servicos()
+        servicos = _servicos(_versao_do_codigo())
     except Exception as erro:
         st.error(f"Não foi possível iniciar a simulação: {erro}")
         st.stop()
@@ -96,14 +106,14 @@ def executar() -> None:
 
     with st.sidebar:
         st.header("Conversas")
-        if st.button("Nova conversa", use_container_width=True):
+        if st.button("Nova conversa", width="stretch"):
             lead = leads.gerar_lead(leads.carregar_listas())
             with pool.connection() as conexao:
                 st.session_state["conversa_id"] = repo_conversas.criar_conversa(
                     conexao, lead.nome, lead.telefone
                 )
         for item in consultas.listar_conversas(pool):
-            if st.button(item["rotulo"], key=f"conversa-{item['id']}", use_container_width=True):
+            if st.button(item["rotulo"], key=f"conversa-{item['id']}", width="stretch"):
                 st.session_state["conversa_id"] = item["id"]
 
     aba_conversa, aba_encaminhados = st.tabs(["Conversa", "Encaminhados"])
@@ -113,4 +123,4 @@ def executar() -> None:
         else:
             _conversa(pool, servicos.responder, st.session_state["conversa_id"])
     with aba_encaminhados:
-        st.dataframe(consultas.encaminhados(pool), use_container_width=True, hide_index=True)
+        st.dataframe(consultas.encaminhados(pool), width="stretch", hide_index=True)

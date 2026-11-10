@@ -151,3 +151,7 @@ O serviço de cotação não é externo. Ele roda localmente, no `docker-compose
 - [[rfc-0004-geracao-de-embeddings]]: download único do modelo de embeddings.
 - [[adr-0015-ferramenta-cotacao-schema-pydantic]]: formato da ferramenta de cotação.
 - [[adr-0013-teto-tokens-e-encaminhamento]]: teto de tokens e encaminhamento.
+
+## Decisão de revisão: temperatura
+
+Os modelos `claude-haiku-5-5` e `claude-opus-5-5` recusam o parâmetro `temperature`, com erro 400. Por isso o adaptador não envia esse parâmetro. A temperatura 0 pedida acima não é garantida pela API. As respostas podem variar entre execuções, e os testes do agente usam modelos substitutos, por isso não dependem dessa variação.
