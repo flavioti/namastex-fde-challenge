@@ -45,7 +45,8 @@
       "rfc-0003-banco-postgres-pgvector": "aprovado",
       "rfc-0006-servico-de-cotacao": "aprovado",
       "rfc-0002-integracao-langsmith": "aprovado",
-      "rfc-0012-ambiente-de-execucao": "aprovado"
+      "rfc-0012-ambiente-de-execucao": "aprovado",
+      "fdd-0010-prompts-do-agente": "rascunho"
     },
     "documentos_lidos": [
       "[[adr-0001-python-e-gerenciador]]",

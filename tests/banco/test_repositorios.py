@@ -126,3 +126,24 @@ def test_trecho_com_dimensao_errada_nao_e_gravado(conexao):
     regras.upsert_regra(conexao, regra, "pro_rata", {}, "h")
     with pytest.raises(ValueError):
         trechos.upsert_trecho(conexao, regra, "x", [0.0] * 3, "e5", "h")
+
+
+def test_mensagem_tem_status_por_papel(conexao):
+    conversa_id = _conversa(conexao)
+    mensagens.registrar_mensagem(conexao, conversa_id, "lead", "oi", agora=AGORA)
+    mensagens.registrar_mensagem(conexao, conversa_id, "agente", "olá", agora=AGORA)
+    lista = mensagens.listar_mensagens(conexao, conversa_id)
+    assert [m["status"] for m in lista] == ["recebida", "enviada"]
+
+
+def test_mensagem_descartada_e_gravada(conexao):
+    conversa_id = _conversa(conexao)
+    mensagens.registrar_mensagem(conexao, conversa_id, "lead", "oi depois do fim", agora=AGORA,
+                                 status="descartada")
+    assert mensagens.listar_mensagens(conexao, conversa_id)[0]["status"] == "descartada"
+
+
+def test_status_de_mensagem_invalido_nao_e_gravado(conexao):
+    conversa_id = _conversa(conexao)
+    with pytest.raises(ValueError):
+        mensagens.registrar_mensagem(conexao, conversa_id, "lead", "oi", status="inventado")

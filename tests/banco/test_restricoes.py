@@ -36,8 +36,8 @@ def test_papel_invalido_em_mensagem_e_recusado(conexao):
     conversa_id = _nova_conversa(conexao)
     with pytest.raises(psycopg.errors.CheckViolation):
         conexao.execute(
-            "INSERT INTO registro.mensagens (id, conversa_id, ordem, papel, conteudo_mascarado, criada_em) "
-            "VALUES (%s, %s, 1, 'sistema', 'oi', %s)",
+            "INSERT INTO registro.mensagens (id, conversa_id, ordem, papel, conteudo_mascarado, criada_em, status) "
+            "VALUES (%s, %s, 1, 'sistema', 'oi', %s, 'recebida')",
             (uuid.uuid4(), conversa_id, AGORA),
         )
     conexao.rollback()
@@ -46,14 +46,14 @@ def test_papel_invalido_em_mensagem_e_recusado(conexao):
 def test_ordem_de_mensagem_unica_na_conversa(conexao):
     conversa_id = _nova_conversa(conexao)
     conexao.execute(
-        "INSERT INTO registro.mensagens (id, conversa_id, ordem, papel, conteudo_mascarado, criada_em) "
-        "VALUES (%s, %s, 1, 'lead', 'oi', %s)",
+        "INSERT INTO registro.mensagens (id, conversa_id, ordem, papel, conteudo_mascarado, criada_em, status) "
+        "VALUES (%s, %s, 1, 'lead', 'oi', %s, 'recebida')",
         (uuid.uuid4(), conversa_id, AGORA),
     )
     with pytest.raises(psycopg.errors.UniqueViolation):
         conexao.execute(
-            "INSERT INTO registro.mensagens (id, conversa_id, ordem, papel, conteudo_mascarado, criada_em) "
-            "VALUES (%s, %s, 1, 'agente', 'olá', %s)",
+            "INSERT INTO registro.mensagens (id, conversa_id, ordem, papel, conteudo_mascarado, criada_em, status) "
+            "VALUES (%s, %s, 1, 'agente', 'olá', %s, 'recebida')",
             (uuid.uuid4(), conversa_id, AGORA),
         )
     conexao.rollback()
@@ -78,8 +78,8 @@ def test_um_encaminhamento_por_conversa(conexao):
 def test_mensagem_sem_conversa_e_recusada(conexao):
     with pytest.raises(psycopg.errors.ForeignKeyViolation):
         conexao.execute(
-            "INSERT INTO registro.mensagens (id, conversa_id, ordem, papel, conteudo_mascarado, criada_em) "
-            "VALUES (%s, %s, 1, 'lead', 'oi', %s)",
+            "INSERT INTO registro.mensagens (id, conversa_id, ordem, papel, conteudo_mascarado, criada_em, status) "
+            "VALUES (%s, %s, 1, 'lead', 'oi', %s, 'recebida')",
             (uuid.uuid4(), uuid.uuid4(), AGORA),
         )
     conexao.rollback()

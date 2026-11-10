@@ -276,3 +276,7 @@ Os testes de banco rodam contra uma instância Postgres real, em contêiner de t
 - [[rfc-0004-geracao-de-embeddings]]: carga e recálculo dos trechos.
 - [[adr-0002-acesso-banco-e-migracoes]]: driver e migrações.
 - [[adr-0005-busca-hibrida-rrf]]: fusão dos rankings.
+
+## Decisão de revisão: status das mensagens
+
+A tabela `registro.mensagens` ganha a coluna `status`, com os valores `recebida` (mensagem do lead), `enviada` (resposta do agente) e `descartada` (mensagem do lead recebida depois do encaminhamento ou do encerramento). A migração `0005_status_mensagens.sql` preenche o status das mensagens existentes.

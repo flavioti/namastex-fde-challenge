@@ -203,7 +203,6 @@ Uma regra removida do `plans.json` não é apagada. Ela fica inativa e sai da bu
 - O consumo do modelo do juiz no teto é contado, mas o consumo das tentativas que falharam não entra.
 - Os textos dos roteiros foram revisados, mas o tom final depende do produto.
 - O CPF digitado antes da autorização não é guardado. O agente pede de novo depois do sim.
-- Os registros de execução não trazem o status das mensagens, só o das conversas e o das cotações.
 - A temperatura não é enviada aos modelos, porque a família Claude 5 não aceita o parâmetro. As respostas podem variar entre execuções.
 
 ## 12. Referências

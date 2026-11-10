@@ -129,3 +129,5 @@ Histórico de alterações dos documentos de design do AutoSeguro (PRD, RFC, ADR
 | 2026-11-10 | docs/tasks.md | Pendência T-33 fechada | Documentação do projeto feita pelo usuário. Item removido do tasks.md. |
 | 2026-11-10 | [[fdd-0005-agente]] | Dados juntos numa mensagem | Idade, ano, CEP e CPF com rótulo ou formato claro são guardados de uma vez. Texto livre sem rótulo continua sendo tentativa (decisão do usuário). |
 | 2026-11-10 | docs/tasks.md | T-32 fechada | Conversa completa testada pelo usuário e funcional. |
+| 2026-11-10 | [[fdd-0004-banco-e-migracoes]] | Status das mensagens | Mensagens têm status recebida, enviada ou descartada. Mensagens do lead depois do encaminhamento ou do encerramento são gravadas como descartada (decisão do usuário). Migração 0005. |
+| 2026-11-10 | [[fdd-0010-prompts-do-agente]] | Criado como rascunho | Documento com todos os prompts do agente e do juiz, gerado a partir das constantes do código, para revisão. Origem: pedido do usuário para documentar o system prompt. |

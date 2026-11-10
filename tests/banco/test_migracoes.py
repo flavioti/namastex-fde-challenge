@@ -16,6 +16,7 @@ def test_migracoes_registradas_em_ordem(conexao):
         "0002_registro.sql",
         "0003_regras.sql",
         "0004_indices.sql",
+        "0005_status_mensagens.sql",
     ]
 
 

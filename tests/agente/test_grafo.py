@@ -385,3 +385,15 @@ def test_dados_juntos_numa_mensagem_sao_guardados(ambiente):
     assert estado.dados["idade"] == 42
     assert estado.dados["cep"] == "[CEP]"
     assert resposta.texto == "[pergunta:ano_veiculo]"
+
+
+def test_mensagem_depois_do_encaminhamento_fica_descartada(ambiente):
+    agente, _ = _agente(ambiente, ModeloAgenteFalso())
+    conversa = ambiente["conversa"]
+    agente.turno(conversa, "quero falar com um atendente")
+    agente.turno(conversa, "alô? tem alguém aí?")
+    with ambiente["registro"].connection() as c:
+        status = [r[0] for r in c.execute(
+            "SELECT status FROM registro.mensagens WHERE conversa_id = %s AND papel = 'lead' ORDER BY ordem",
+            (conversa,)).fetchall()]
+    assert status == ["recebida", "descartada"]

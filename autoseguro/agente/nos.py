@@ -138,6 +138,9 @@ def criar_nos(deps: Dependencias) -> dict[str, Callable[[EstadoConversa], dict]]
 
     def entrada(estado: EstadoConversa) -> dict:
         if estado.status in STATUS_TERMINAIS:
+            # Mensagem recebida depois do encaminhamento ou do encerramento: registrada, sem resposta.
+            registro(repo_mensagens.registrar_mensagem, estado.conversa_id, "lead",
+                     mascarar_entrada(estado.texto_original or "", estado.conversa_id).texto, status="descartada")
             return {"proxima": "fim", "texto_original": None}
         texto = estado.texto_original or ""
         dados = estado.dados.model_copy()
