@@ -23,7 +23,12 @@ def _servicos() -> Servicos:
 def _estado_do_agente(responder: Any, conversa_id) -> Optional[dict]:
     if not hasattr(responder, "ler_estado"):
         return None
-    leitura = responder.ler_estado(conversa_id)
+    try:
+        leitura = responder.ler_estado(conversa_id)
+    except Exception:
+        # Queda do banco no meio da leitura. A página segue, e o painel mostra o aviso.
+        st.session_state[CHAVE_AVISO] = ("aviso", "Não foi possível ler os dados coletados. Tente de novo.")
+        return None
     return {"dados": leitura.dados}
 
 

@@ -68,6 +68,23 @@ def extrair_cpf(texto: str) -> str | None:
     return "".join(casamento.groups())
 
 
+_INICIO_DE_PERGUNTA = re.compile(
+    r"^\s*(para que|pra que|o que|oq|como|quem|qual|quais|quando|onde|por que|porque|quanto|quanto custa)\b",
+    re.IGNORECASE,
+)
+_SAUDACAO = re.compile(
+    r"^\s*(oi|olá|ola|bom dia|boa tarde|boa noite|tudo bem|e aí|e ai|obrigad[oa])\b",
+    re.IGNORECASE,
+)
+
+
+def eh_outro_contexto(texto: str) -> bool:
+    """Pergunta, saudação ou agradecimento. Não é resposta ao dado pedido, e não conta como tentativa."""
+    if "?" in texto:
+        return True
+    return bool(_INICIO_DE_PERGUNTA.search(texto) or _SAUDACAO.search(texto))
+
+
 def extrair_plano(texto: str) -> str | None:
     encontrados = [p for p in PLANOS if re.search(rf"\b{p}\b", texto, re.IGNORECASE)]
     return encontrados[0] if len(encontrados) == 1 else None

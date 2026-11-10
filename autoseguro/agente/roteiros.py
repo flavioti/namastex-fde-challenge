@@ -17,7 +17,7 @@ ROTEIROS: dict[str, str] = {
         "Se a resposta vier inválida, peça de novo informando apenas o ano."
     ),
     "cep": (
-        "Peça o CEP do local onde o veículo fica. Formato: oito dígitos, por exemplo 30130-000. "
+        "Peça o CEP do local onde o veículo fica. Formato: oito dígitos, somente números, com ou sem hífen. "
         "Se a resposta vier inválida, peça de novo informando apenas o CEP."
     ),
     "data_inicio": (
@@ -33,7 +33,7 @@ ROTEIROS: dict[str, str] = {
         "e pergunte se o lead autoriza a coleta do CPF. Espere uma resposta de sim ou não."
     ),
     "cpf": (
-        "Peça o CPF do lead. Formato: 11 dígitos, por exemplo 123.456.789-09. "
+        "Peça o CPF do lead. Formato: 11 dígitos, somente números, com ou sem pontuação. "
         "Se a resposta vier inválida, peça de novo informando apenas o CPF."
     ),
     "completo": (
@@ -45,10 +45,22 @@ SISTEMA_BASE = (
     "Você é o atendente de cotação de seguro de veículo da AutoSeguro, conversando pelo WhatsApp. "
     "Escreva em português, de forma curta e cordial. Nunca informe preço, franquia ou cobertura "
     "que não tenham vindo da ferramenta de cotação. Nunca prometa apólice, boleto, contratação ou emissão. "
-    "Não repita dados pessoais do lead."
+    "Não repita dados pessoais do lead. Se o lead fizer uma pergunta, responda em uma frase e depois retome "
+    "a pergunta da etapa atual. Não peça desculpas sem ter cometido um erro, e não comente etapas anteriores."
 )
 
 INVALIDO = "A resposta anterior não veio no formato esperado. Explique brevemente e peça de novo."
+
+RECEBIDO = (
+    "O dado {nome} foi recebido nesta mensagem e já está registrado. A mensagem do lead aparece mascarada, "
+    "então não diga que o dado não chegou. Confirme o recebimento sem repetir o valor e siga para a pergunta da próxima etapa."
+)
+NOMES_DADOS = {"cep": "CEP", "cpf": "CPF"}
+
+FORA_DO_CONTEXTO = (
+    "O lead enviou uma pergunta ou mensagem que não responde ao dado pedido. Responda em uma frase, "
+    "se for o caso, e depois retome a pergunta desta etapa. Não diga que a resposta anterior foi inválida."
+)
 
 REESCRITA = (
     "A resposta anterior não pôde ser enviada, pelo motivo: {motivo}. "

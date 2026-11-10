@@ -130,13 +130,16 @@ def criar_nos(deps: Dependencias) -> dict[str, Callable[[EstadoConversa], dict]]
         dados = estado.dados.model_copy()
         passo = _passo(dados, estado.cotacao)
         capturou = False
+        recebido = None
         for achado in detectar(texto):
             if achado.tipo == "cep" and passo == "cep" and dados.cep is None:
                 dados.cep = cv.extrair_cep(achado.valor)
                 capturou = dados.cep is not None or capturou
+                recebido = "cep" if dados.cep else recebido
             if achado.tipo == "cpf" and passo == "cpf" and dados.cpf is None:
                 dados.cpf = cv.extrair_cpf(achado.valor)
                 capturou = dados.cpf is not None or capturou
+                recebido = "cpf" if dados.cpf else recebido
 
         mascarado = mascarar_entrada(texto, estado.conversa_id).texto
         registro(repo_mensagens.registrar_mensagem, estado.conversa_id, "lead", mascarado)
@@ -156,17 +159,20 @@ def criar_nos(deps: Dependencias) -> dict[str, Callable[[EstadoConversa], dict]]
                 mensagens = mensagens[-MENSAGENS_LITERAIS:]
                 return {"mensagens": mensagens, "resumo": resumo, "dados": dados,
                         "tokens_consumidos": estado.tokens_consumidos + tokens,
-                        "texto_original": None if capturou else texto, "proxima": "coleta"}
+                        "texto_original": None if capturou else texto, "proxima": "coleta",
+                        "recebido_agora": recebido}
 
         return {"mensagens": mensagens, "dados": dados,
-                "texto_original": None if capturou else texto, "proxima": "coleta"}
+                "texto_original": None if capturou else texto, "proxima": "coleta",
+                "recebido_agora": recebido}
 
     def coleta(estado: EstadoConversa) -> dict:
         dados = estado.dados.model_copy()
         tentativas = dict(estado.tentativas)
         texto = estado.texto_original
         cotacao = estado.cotacao
-        base: dict[str, Any] = {"texto_original": None, "campo_invalido": None}
+        fora_do_contexto = False
+        base: dict[str, Any] = {"texto_original": None, "campo_invalido": None, "recebido_agora": None}
 
         if texto is not None:
             minusculo = texto.lower()
@@ -180,6 +186,8 @@ def criar_nos(deps: Dependencias) -> dict[str, Callable[[EstadoConversa], dict]]
                 if valor is not None:
                     setattr(dados, passo, valor)
                     tentativas[passo] = 0
+                elif cv.eh_outro_contexto(texto):
+                    fora_do_contexto = True  # pergunta ou saudação não conta como tentativa
                 else:
                     tentativas[passo] = tentativas.get(passo, 0) + 1
                     if tentativas[passo] >= 3:
@@ -204,6 +212,10 @@ def criar_nos(deps: Dependencias) -> dict[str, Callable[[EstadoConversa], dict]]
         # estiver no histórico, pois a API exige a definição da ferramenta nesse caso.
         ferramentas = [consultar_cotacao] if (passo == "completo" or estado.trocas) else []
         sistema = _sistema(passo, base["campo_invalido"], estado.motivo_juiz, estado.resumo)
+        if estado.recebido_agora:
+            sistema += "\n\n" + roteiros.RECEBIDO.format(nome=roteiros.NOMES_DADOS[estado.recebido_agora])
+        if fora_do_contexto:
+            sistema += "\n\n" + roteiros.FORA_DO_CONTEXTO
         historico = _historico(estado.mensagens, estado.trocas)
 
         try:

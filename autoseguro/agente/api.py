@@ -90,6 +90,7 @@ class Agente:
             "resposta_turno": None,
             "motivo_encaminhamento": None,
             "trace_id": str(run_id),
+            "recebido_agora": None,
         }
         metadados = {
             obs_config.CHAVES["conversa_id"]: str(conversa_id),

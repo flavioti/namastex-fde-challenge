@@ -88,3 +88,16 @@ def test_plano(texto, esperado):
 ])
 def test_consentimento(texto, esperado):
     assert cv.extrair_consentimento(texto) == esperado
+
+
+@pytest.mark.parametrize("texto, esperado", [
+    ("Para que serve esse serviço?", True),
+    ("qual o preço?", True),
+    ("Oi, boa noite", True),
+    ("obrigado", True),
+    ("trinta", False),
+    ("tenho uns 35", False),
+    ("35", False),
+])
+def test_outro_contexto(texto, esperado):
+    assert cv.eh_outro_contexto(texto) == esperado

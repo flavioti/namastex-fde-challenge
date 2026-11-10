@@ -331,3 +331,27 @@ def test_referencia_do_trace_e_gravada_uma_vez(ambiente):
     agente._gravar_referencia_trace(conversa, str(uuid.uuid4()))
     with ambiente["registro"].connection() as c:
         assert avaliacoes.obter_referencia_trace(c, conversa) == str(primeiro)
+
+
+def test_modelo_e_avisado_de_que_o_cep_foi_recebido(ambiente):
+    modelo = ModeloAgenteFalso()
+    agente, _ = _agente(ambiente, modelo)
+    conversa = ambiente["conversa"]
+    _conversar(agente, conversa, ["35", "2022", "01310-100"])
+    assert any("O dado CEP foi recebido nesta mensagem" in texto for texto in modelo.recebido)
+    assert not any("CEP ainda não" in texto for texto in modelo.recebido)
+
+
+def test_pergunta_nao_conta_como_tentativa(ambiente):
+    agente, _ = _agente(ambiente, ModeloAgenteFalso())
+    conversa = ambiente["conversa"]
+    respostas = _conversar(agente, conversa, ["Oi, boa noite", "Para que serve?", "Qual o preço?", "42"])
+    assert all(not r.encaminhada for r in respostas)
+    assert agente.ler_estado(conversa).dados["idade"] == 42
+
+
+def test_tres_respostas_invalidas_ainda_encaminham_apos_perguntas(ambiente):
+    agente, _ = _agente(ambiente, ModeloAgenteFalso())
+    conversa = ambiente["conversa"]
+    _conversar(agente, conversa, ["Para que serve?", "trinta", "abc", "xx"])
+    assert _encaminhamento(ambiente["registro"], conversa)[0] == "Dado inválido após tentativas"

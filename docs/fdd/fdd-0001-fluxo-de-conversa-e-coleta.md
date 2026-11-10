@@ -75,7 +75,9 @@ Um dado inválido recebe uma explicação curta e um novo pedido. Essa regra val
 - Após a primeira resposta inválida, o agente pede de novo, até duas vezes.
 - Se a terceira resposta também for inválida, a conversa é encaminhada para um humano, com o motivo "dado inválido após tentativas".
 
-O contador de tentativas é por campo, e não por conversa. Quando um campo válido é recebido, o contador daquele campo volta a zero.
+O contador de tentativas é por campo, e não por conversa.
+
+**Mensagens fora do contexto (decisão do usuário).** Perguntas, saudações e agradecimentos não contam como tentativa. O agente responde em uma frase e retoma a pergunta da etapa. Uma resposta inválida de fato, como "trinta", continua contando. Quando um campo válido é recebido, o contador daquele campo volta a zero.
 
 ## 5. Mensagens
 

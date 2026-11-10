@@ -47,4 +47,5 @@ class EstadoConversa(BaseModel):
     motivo_juiz: Optional[str] = None
     campo_invalido: Optional[str] = None
     resposta_turno: Optional[str] = None
+    recebido_agora: Optional[str] = None  # dado capturado da mensagem atual, sem o valor
     trace_id: Optional[str] = None  # run raiz do turno no LangSmith, usado pelos feedbacks do juiz
